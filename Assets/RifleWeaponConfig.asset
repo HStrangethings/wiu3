@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3582e0c5803be9448c072c44182b5b4, type: 3}
+  m_Name: RifleWeaponConfig
+  m_EditorClassIdentifier: 
+  weaponName: Rifle
+  notes: 
+  bindings:
+  - binding:
+      name: Primary Fire
+      key: 32
+      mouseButton: 0
+      onHold: 0
+    ability: {fileID: 11400000, guid: 4f23e8e4b625998459494c190212b14c, type: 2}
