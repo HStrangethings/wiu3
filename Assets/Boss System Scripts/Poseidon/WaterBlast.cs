@@ -3,20 +3,27 @@ using UnityEngine;
 
 public class WaterBlast : BossMove
 {
+    private PoseidonBoss boss;
+    private float projSpeed;
+    public WaterBlast(PoseidonBoss boss, float projSpeed) : base(boss)
+    {
+        this.boss = boss;
+        this.projSpeed = projSpeed;
+    }
     private float timer = 0;
+    private GameObject proj;
     public override void Start()
     {
         Debug.Log("Starting WaterBlast");
+        proj = Object.Instantiate(boss.waterBlastProj, boss.transform.position + boss.transform.forward * 1, Quaternion.LookRotation(boss.transform.forward));
     }
     public override void Execute()
     {
-        Debug.Log("Executing WaterBlast");
-        if (timer <= 5f)
-        {
-            timer += Time.deltaTime;
-        }
+        if (timer < 3) { timer += Time.deltaTime; }
         else
         {
+            var projRb = proj.GetComponent<Rigidbody>();
+            projRb.AddForce(projRb.transform.forward * projSpeed, ForceMode.Impulse);
             isFinished = true;
         }
     }
