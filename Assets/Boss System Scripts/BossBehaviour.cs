@@ -23,7 +23,7 @@ public class BossBehaviour : MonoBehaviour
     }
     public Vector3 MoveToPlayer()
     {
-        Debug.Log("moving to player");
+        //Debug.Log("moving to player");
         Vector3 dir = (player.transform.position - rb.position).normalized;
         Vector3 movement = dir * boss.speed;
         Vector3 finalMove = new Vector3(movement.x, 0, movement.z);

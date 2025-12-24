@@ -8,7 +8,7 @@ public class PosAttackState : BossState
     {
         //Debug.Log("Entering Poseidon Attack State");
         boss.rb.linearVelocity = Vector3.zero;
-        Debug.Log(boss.rb.linearVelocity);
+        //Debug.Log(boss.rb.linearVelocity);
     }
 
     public override void Execute()
@@ -16,7 +16,7 @@ public class PosAttackState : BossState
         //Debug.Log("Currently in Poseidon Attack State");
         if (Input.GetKeyDown(KeyCode.F))
         {
-            boss.mm.PlayMove("waterBlast");
+            boss.mm.PlayMove("wideWaterBlast");
         }
     }
 

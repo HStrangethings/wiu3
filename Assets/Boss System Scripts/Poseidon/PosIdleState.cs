@@ -16,7 +16,10 @@ public class PosIdleState : BossState
     public override void Execute()
     {
         //Debug.Log("Currently in Poseidon Idle State");
-        if (timer < 3f) { timer += Time.deltaTime; Debug.Log("Idleing"); }
+        if (timer < 3f) { 
+            timer += Time.deltaTime; 
+            //Debug.Log("Idleing");
+            }
         else
         {
             if (randomCooldown < 0.5) { randomCooldown += Time.deltaTime; }
@@ -25,7 +28,7 @@ public class PosIdleState : BossState
                 randomCooldown = 0;
                 Debug.Log("rolling random number");
                 int r = UnityEngine.Random.Range(0, 100);
-                if (r > 50)
+                if (r > 0)
                 {
                     Debug.Log("Entering AttackState");
                     Vector3 distVect = boss.player.transform.position - boss.transform.position;

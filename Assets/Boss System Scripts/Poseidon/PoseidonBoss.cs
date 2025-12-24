@@ -15,7 +15,8 @@ public class PoseidonBoss : BossBehaviour
         sm.AddState(new PosAttackState(sm,this));
 
         //add all the bosses attacks
-        mm.AddMove("waterBlast", new WaterBlast(this,20));
+        mm.AddMove("waterBlast", new WaterBlast(this, 20));
+        mm.AddMove("wideWaterBlast", new WideWaterBlast(this, 20));
 
         //start the statemachine with its first state
         sm.Initialize<PosIdleState>();

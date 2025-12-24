@@ -183,7 +183,7 @@ MonoBehaviour:
   mm: {fileID: 0}
   player: {fileID: 0}
   rb: {fileID: 0}
-  waterBlastProj: {fileID: 678346583850116468, guid: 39e47d8f2384e8e46901677a8cadc8c3, type: 3}
+  waterBlastProj: {fileID: 1774211470298115458, guid: 88b573982cd270f40ae5596718028f7f, type: 3}
 --- !u!65 &107838982
 BoxCollider:
   m_ObjectHideFlags: 0
