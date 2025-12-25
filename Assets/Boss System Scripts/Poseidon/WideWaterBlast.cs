@@ -57,15 +57,6 @@ public class WideWaterBlast : BossMove
             }
             isFinished = true;
         }
-        //Quaternion.Euler(0, 15, 0)
-
-        //if (timer < 3) { timer += Time.deltaTime; }
-        //else
-        //{
-        //    var projRb = proj.GetComponent<Rigidbody>();
-        //    projRb.AddForce(projRb.transform.forward * projSpeed, ForceMode.Impulse);
-        //    isFinished = true;
-        //}
     }
     public override void End()
     {
