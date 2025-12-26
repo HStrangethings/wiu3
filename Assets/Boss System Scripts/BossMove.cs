@@ -18,5 +18,8 @@ public abstract class BossMove
     {
         isFinished = true;
     }
+    public abstract void AnimEvent(string evt);
+    public abstract BossMove Clone();
+
 
 }

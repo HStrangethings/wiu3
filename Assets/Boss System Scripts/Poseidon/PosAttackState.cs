@@ -16,7 +16,11 @@ public class PosAttackState : BossState
         //Debug.Log("Currently in Poseidon Attack State");
         if (Input.GetKeyDown(KeyCode.F))
         {
-            boss.mm.PlayMove("wideWaterBlast");
+            boss.mm.PlayMove("posMelee");
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            boss.mm.PlayMove("waterWave");
         }
     }
 

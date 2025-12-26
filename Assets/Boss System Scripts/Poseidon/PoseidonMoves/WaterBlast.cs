@@ -32,4 +32,25 @@ public class WaterBlast : BossMove
         Debug.Log("Ending WaterBlast");
         base.End();
     }
+    public override void AnimEvent(string evt)
+    {
+        switch (evt)
+        {
+            case "start":
+                //spawn projectile to start its own animation
+                break;
+
+            case "end":
+                var projRb = proj.GetComponent<Rigidbody>();
+                projRb.AddForce(projRb.transform.forward * projSpeed, ForceMode.Impulse);
+                isFinished = true;
+                break;
+        }
+    }
+
+    public override BossMove Clone()
+    {
+        return new WaterBlast(this.boss, this.projSpeed);
+    }
+
 }

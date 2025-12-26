@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class BossBehaviour : MonoBehaviour
 {
-    [HideInInspector]
     public BossStats boss;
     [HideInInspector]
     public BossStateMachine sm;
@@ -14,12 +13,20 @@ public class BossBehaviour : MonoBehaviour
     [HideInInspector]
     public Rigidbody rb;
 
+    [HideInInspector]
+    public Animator animator;
+
+    [HideInInspector]
+    public HitboxManager hitboxManager;
+
     public virtual void Start()
     {
         sm = GetComponent<BossStateMachine>();
         mm = GetComponent<BossMoveMachine>();
         player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+        hitboxManager = GetComponent<HitboxManager>();
     }
     public Vector3 MoveToPlayer()
     {

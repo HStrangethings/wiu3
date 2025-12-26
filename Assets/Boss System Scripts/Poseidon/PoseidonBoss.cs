@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class PoseidonBoss : BossBehaviour
 {
-
-    //TODO: add teleporting next
-
     public GameObject waterBlastProj;
+    public GameObject waterWaveProj;
+
+    // list of all hitboxes
+    public HitboxID Harms;
+
     public override void Start()
     {
         base.Start();
@@ -17,6 +19,8 @@ public class PoseidonBoss : BossBehaviour
         //add all the bosses attacks
         mm.AddMove("waterBlast", new WaterBlast(this, 20));
         mm.AddMove("wideWaterBlast", new WideWaterBlast(this, 20));
+        mm.AddMove("waterWave", new WaterWave(this, 10, 9.5f, 3f)); //default wave xSize is 9.5
+        mm.AddMove("posMelee", new PosMeleeAttack(this)); //default wave xSize is 9.5
 
         //start the statemachine with its first state
         sm.Initialize<PosIdleState>();

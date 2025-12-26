@@ -16,7 +16,7 @@ public class PosIdleState : BossState
     public override void Execute()
     {
         //Debug.Log("Currently in Poseidon Idle State");
-        if (timer < 3f) { 
+        if (timer < 1f) { 
             timer += Time.deltaTime; 
             //Debug.Log("Idleing");
             }
@@ -33,7 +33,7 @@ public class PosIdleState : BossState
                     Debug.Log("Entering AttackState");
                     Vector3 distVect = boss.player.transform.position - boss.transform.position;
                     float dist = distVect.magnitude;
-                    if (dist > 2) { sm.ChangeState<PosAttackState>(); return; }
+                    if (dist > 4) { sm.ChangeState<PosAttackState>(); return; }
                 }
                 else { Debug.Log("random number failed"); }
             }

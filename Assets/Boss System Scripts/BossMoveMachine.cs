@@ -38,7 +38,7 @@ public class BossMoveMachine : MonoBehaviour
             return;
         }
 
-        var newMove = _moves[id];
+        var newMove = _moves[id].Clone();
 
         // Do not start a new move if one is already active
         if (currentMove != null)
@@ -54,5 +54,10 @@ public class BossMoveMachine : MonoBehaviour
     public void ForceStopMove()
     {
         currentMove.isFinished = true;
+    }
+
+    public void AnimEvent(string evt)
+    {
+        currentMove.AnimEvent(evt);
     }
 }
