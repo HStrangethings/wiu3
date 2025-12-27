@@ -510,6 +510,7 @@ GameObject:
   - component: {fileID: 489129153}
   - component: {fileID: 489129156}
   - component: {fileID: 489129155}
+  - component: {fileID: 489129158}
   - component: {fileID: 489129157}
   - component: {fileID: 489129154}
   m_Layer: 0
@@ -617,14 +618,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 489129152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec5bcd8d334e9bf47966e0ed3e6d104b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b792b40316164c4eb9de2deaaa0d9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
   damageName: posArms
-  isActive: 1
-  hitbox: {fileID: 11400000, guid: 81edd57623e9612409d561f1d2ec0c8e, type: 2}
+  isActive: 0
+  hasVFX: 1
   impactVFX: {fileID: 9163852891436468882, guid: 8d2e981e6c85c794fa75a97ec8106eae, type: 3}
+--- !u!114 &489129158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489129152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59589803524069541a98e8742693ea5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: 489129157}
 --- !u!1 &1109149261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,6 +1146,7 @@ GameObject:
   - component: {fileID: 1736451704}
   - component: {fileID: 1736451707}
   - component: {fileID: 1736451706}
+  - component: {fileID: 1736451709}
   - component: {fileID: 1736451708}
   - component: {fileID: 1736451705}
   m_Layer: 0
@@ -1238,14 +1254,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1736451703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec5bcd8d334e9bf47966e0ed3e6d104b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b792b40316164c4eb9de2deaaa0d9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
   damageName: posArms
-  isActive: 1
-  hitbox: {fileID: 11400000, guid: 81edd57623e9612409d561f1d2ec0c8e, type: 2}
+  isActive: 0
+  hasVFX: 1
   impactVFX: {fileID: 9163852891436468882, guid: 8d2e981e6c85c794fa75a97ec8106eae, type: 3}
+--- !u!114 &1736451709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736451703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59589803524069541a98e8742693ea5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: 489129157}
 --- !u!1 &1839911336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1257,6 +1287,7 @@ GameObject:
   - component: {fileID: 1839911337}
   - component: {fileID: 1839911340}
   - component: {fileID: 1839911339}
+  - component: {fileID: 1839911342}
   - component: {fileID: 1839911341}
   - component: {fileID: 1839911338}
   m_Layer: 0
@@ -1364,14 +1395,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1839911336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec5bcd8d334e9bf47966e0ed3e6d104b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b792b40316164c4eb9de2deaaa0d9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
   damageName: posArms
-  isActive: 1
-  hitbox: {fileID: 11400000, guid: 81edd57623e9612409d561f1d2ec0c8e, type: 2}
+  isActive: 0
+  hasVFX: 1
   impactVFX: {fileID: 9163852891436468882, guid: 8d2e981e6c85c794fa75a97ec8106eae, type: 3}
+--- !u!114 &1839911342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839911336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59589803524069541a98e8742693ea5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: 489129157}
 --- !u!1 &1918413699
 GameObject:
   m_ObjectHideFlags: 0

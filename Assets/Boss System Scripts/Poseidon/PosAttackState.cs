@@ -20,7 +20,7 @@ public class PosAttackState : BossState
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            boss.mm.PlayMove("waterWave");
+            boss.mm.PlayMove("waterBlast");
         }
     }
 

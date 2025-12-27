@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 5558553814608806865}
   - component: {fileID: 954707338430777914}
   - component: {fileID: 6211382183580018581}
+  - component: {fileID: 2491053503176751741}
   - component: {fileID: 3976562335536510675}
+  - component: {fileID: 1144857372923873748}
   - component: {fileID: 2605180030761342893}
   - component: {fileID: -3967361517493744591}
   m_Layer: 0
@@ -89,6 +91,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2491053503176751741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774211470298115458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59589803524069541a98e8742693ea5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: 3976562335536510675}
+  - {fileID: 1144857372923873748}
 --- !u!114 &3976562335536510675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,12 +115,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1774211470298115458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64080ddaf641e9044909141ab5d01988, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b792b40316164c4eb9de2deaaa0d9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
   damageName: waterBlast
+  isActive: 1
+  hasVFX: 1
   impactVFX: {fileID: 9163852891436468882, guid: 8d2e981e6c85c794fa75a97ec8106eae, type: 3}
+--- !u!114 &1144857372923873748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774211470298115458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 962a7c6dbac0a5046b7f5a70119fba72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &2605180030761342893
 BoxCollider:
   m_ObjectHideFlags: 0

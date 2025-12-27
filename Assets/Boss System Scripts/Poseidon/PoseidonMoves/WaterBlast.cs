@@ -15,15 +15,19 @@ public class WaterBlast : BossMove
     public override void Start()
     {
         Debug.Log("Starting WaterBlast");
-        proj = Object.Instantiate(boss.waterBlastProj, boss.transform.position + boss.transform.forward * 1, Quaternion.LookRotation(boss.transform.forward));
+        //s
+        proj = Object.Instantiate(boss.waterBlastProj, boss.transform.position + boss.transform.forward * 9, Quaternion.LookRotation(boss.transform.forward));
     }
     public override void Execute()
     {
         if (timer < 3) { timer += Time.deltaTime; }
         else
         {
-            var projRb = proj.GetComponent<Rigidbody>();
-            projRb.AddForce(projRb.transform.forward * projSpeed, ForceMode.Impulse);
+            if (proj != null)
+            {
+                var projRb = proj.GetComponent<Rigidbody>();
+                projRb.AddForce(projRb.transform.forward * projSpeed, ForceMode.Impulse);
+            }
             isFinished = true;
         }
     }

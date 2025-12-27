@@ -1,12 +1,14 @@
 using UnityEngine;
 
-public class DamageDealer : MonoBehaviour
+public class DamageDealer : MonoBehaviour, ITriggerReceiver
 {
     public float damage;
     public string damageName;
     public bool isActive = true;
+    public bool hasVFX = false;
+    public GameObject impactVFX;
 
-    public virtual void OnTriggerEnter(Collider other)
+    public void OnTrigger(Collider other)
     {
         if (CheckHit())
         {
@@ -52,5 +54,10 @@ public class DamageDealer : MonoBehaviour
     {
         var dmgInfo = new DamageInfo(this.gameObject, damageName, damage, hitPoint, normal, false);
         dmg.TryTakeDamage(dmgInfo);
+
+
+        //Add an effect here, or add an effect on player hit, depends
+        Quaternion rot = Quaternion.LookRotation(normal, Vector3.up);
+        Instantiate(impactVFX, hitPoint + normal * 0.02f, rot);
     }
 }

@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7416767721398008378}
   - component: {fileID: 1886621849558329097}
   - component: {fileID: 1962401483103708087}
-  - component: {fileID: -1169461764475066060}
+  - component: {fileID: 7384555605214294727}
+  - component: {fileID: 981530283000532113}
   - component: {fileID: 314614805951316370}
   - component: {fileID: 71693873362348929}
   m_Layer: 0
@@ -89,7 +90,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-1169461764475066060
+--- !u!114 &7384555605214294727
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,11 +99,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 463721083583521429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52f18c51e38ebbd4bab82df34e2a3a59, type: 3}
+  m_Script: {fileID: 11500000, guid: 59589803524069541a98e8742693ea5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: 981530283000532113}
+--- !u!114 &981530283000532113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463721083583521429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b792b40316164c4eb9de2deaaa0d9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
   damageName: waterWave
+  isActive: 1
+  hasVFX: 1
   impactVFX: {fileID: 9163852891436468882, guid: 8d2e981e6c85c794fa75a97ec8106eae, type: 3}
 --- !u!65 &314614805951316370
 BoxCollider:
