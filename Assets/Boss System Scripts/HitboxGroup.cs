@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class HitboxGroup : MonoBehaviour
@@ -14,5 +15,19 @@ public class HitboxGroup : MonoBehaviour
     public void SetEnabled(bool enabled)
     {
         foreach(DamageDealer d in hitboxes) { d.isActive = enabled; }
+    }
+
+    public void SetMoveMachines(BossMoveMachine mm)
+    {
+        foreach (var d in hitboxes)
+            if (d is IBossHitReporter r)
+                r.SetMoveMachine(mm);
+    }
+
+    public void SetHitReports(Type moveType)
+    {
+        foreach (var d in hitboxes)
+            if (d is IBossHitReporter r)
+                r.SetMoveType(moveType);
     }
 }

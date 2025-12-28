@@ -22,4 +22,15 @@ public abstract class BossMove
     public abstract BossMove Clone();
 
 
+    public void SetupBossHitReporting(GameObject go)
+    {
+        if (go == null) return;
+
+        var dealer = go.GetComponent<BossDamageDealer>();
+        if (dealer == null) return;
+
+        dealer.sourceMove = GetType();
+        dealer.mm = boss.mm;
+    }
+
 }

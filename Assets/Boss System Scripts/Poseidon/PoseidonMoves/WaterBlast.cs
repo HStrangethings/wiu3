@@ -17,6 +17,7 @@ public class WaterBlast : BossMove
         Debug.Log("Starting WaterBlast");
         //s
         proj = Object.Instantiate(boss.waterBlastProj, boss.transform.position + boss.transform.forward * 9, Quaternion.LookRotation(boss.transform.forward));
+        SetupBossHitReporting(proj);
     }
     public override void Execute()
     {

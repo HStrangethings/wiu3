@@ -3,25 +3,23 @@ using UnityEngine;
 public class PosAttackState : BossState
 {
     public PosAttackState(BossStateMachine sm, BossBehaviour boss) : base(sm, boss) { }
+    BossStats bossStat;
 
     public override void Enter()
     {
-        //Debug.Log("Entering Poseidon Attack State");
+        bossStat = boss.boss;
         boss.rb.linearVelocity = Vector3.zero;
-        //Debug.Log(boss.rb.linearVelocity);
+
+        if (boss.DistanceToPlayer().magnitude < bossStat.bossRad + bossStat.bossMeleeReach)
+        {
+            boss.mm.PlayMove("posMelee");
+        }
     }
 
     public override void Execute()
     {
-        //Debug.Log("Currently in Poseidon Attack State");
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            boss.mm.PlayMove("posMelee");
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            boss.mm.PlayMove("waterBlast");
-        }
+        Quaternion rotateToPlayer = boss.RotateToPlayer();
+        boss.transform.rotation = rotateToPlayer;
     }
 
     public override void Exit()

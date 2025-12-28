@@ -16,6 +16,12 @@ public class WideWaterBlast : BossMove
     public override void Start()
     {
         Debug.Log("Starting WideWaterBlast");
+        foreach(GameObject p in proj)
+        {
+            var dealer = p.GetComponent<BossDamageDealer>();
+            dealer.sourceMove = GetType();
+            dealer.mm = boss.mm;
+        }
     }
     public override void Execute()
     {
@@ -29,6 +35,8 @@ public class WideWaterBlast : BossMove
                 Vector3 spawn = boss.transform.TransformPoint(localOffset);
                 proj[0] = Object.Instantiate(boss.waterBlastProj, spawn, boss.transform.rotation,boss.transform);
                 proj[0].transform.localRotation *= Quaternion.Euler(0f, 25f, 0f);
+
+                SetupBossHitReporting(proj[0]);
             }
             if (timer > timeIntervals * 2 && !projCreated[1])
             {
@@ -37,6 +45,8 @@ public class WideWaterBlast : BossMove
                 Vector3 spawn = boss.transform.TransformPoint(localOffset);
                 proj[1] = Object.Instantiate(boss.waterBlastProj, spawn, boss.transform.rotation, boss.transform);
                 proj[1].transform.localRotation *= Quaternion.Euler(0f, 0f, 0f);
+
+                SetupBossHitReporting(proj[1]);
             }
             if (timer > timeIntervals * 3 && !projCreated[2])
             {
@@ -45,6 +55,8 @@ public class WideWaterBlast : BossMove
                 Vector3 spawn = boss.transform.TransformPoint(localOffset);
                 proj[2] = Object.Instantiate(boss.waterBlastProj, spawn, boss.transform.rotation, boss.transform);
                 proj[2].transform.localRotation *= Quaternion.Euler(0f, -25f, 0f);
+
+                SetupBossHitReporting(proj[2]);
             }
         }
         else

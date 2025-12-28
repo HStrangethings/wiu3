@@ -30,6 +30,7 @@ public class PosMeleeAttack : BossMove
         switch (evt)
         {
             case "start":
+                boss.hitboxManager.SetGroupHitReports(boss.Harms, GetType());
                 boss.hitboxManager.SetGroup(boss.Harms, true);
                 break;
 

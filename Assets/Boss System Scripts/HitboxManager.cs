@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,5 +16,19 @@ public class HitboxManager : MonoBehaviour
         for (int i = 0; i < groups.Length; i++)
             if (groups[i].id == id)
                 groups[i].SetEnabled(on);
+    }
+
+    public void SetGroupHitReports(HitboxID id, Type moveType)
+    {
+        for (int i = 0; i < groups.Length; i++)
+            if (groups[i].id == id)
+                groups[i].SetHitReports(moveType);
+    }
+
+    public void SetGroupMoveMachines(HitboxID id, BossMoveMachine mm)
+    {
+        for (int i = 0; i < groups.Length; i++)
+            if (groups[i].id == id)
+                groups[i].SetMoveMachines(mm);
     }
 }

@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Poseidon
   m_EditorClassIdentifier: 
   bossName: Poseidon
+  baseHealth: 100
+  baseAtk: 50
+  baseSpeed: 2
+  health01: 0
   health: 100
-  maxHealth: 100
   atk: 50
   speed: 2
+  bossRad: 0
+  bossMeleeReach: 0

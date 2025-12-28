@@ -20,6 +20,7 @@ public class WaterWave : BossMove
         Debug.Log("Starting WaterWave");
         proj = Object.Instantiate(boss.waterWaveProj, boss.transform.position + boss.transform.forward * 7, Quaternion.LookRotation(boss.transform.forward));
         proj.transform.localScale = new Vector3(xSize, 0, boss.waterWaveProj.transform.localScale.z);
+        SetupBossHitReporting(proj);
     }
     public override void Execute()
     {
