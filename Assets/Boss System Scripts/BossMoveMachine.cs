@@ -11,9 +11,14 @@ public class BossMoveMachine : MonoBehaviour
     public BossMove currentMove;
 
     private Queue<string> queuedMoves = new Queue<string>();
+    private bool startNextFrame;
+
+    private int comboCounter = 0;
 
     public float lastHitTime = -999f;
     public Type lastHitMove;
+
+    public event Action comboFin;
 
     public void AddMove(string id, BossMove move)
     {
@@ -23,11 +28,16 @@ public class BossMoveMachine : MonoBehaviour
 
     void Update()
     {
-        // If nothing is playing, try start next queued move
+        // Start queued move only on the next frame
         if (currentMove == null)
         {
-            if (queuedMoves.Count > 0)
-                PlayMoveImmediate(queuedMoves.Dequeue());
+            if (startNextFrame)
+            {
+                startNextFrame = false;
+
+                if (queuedMoves.Count > 0)
+                    PlayMoveImmediate(queuedMoves.Dequeue());
+            }
 
             return;
         }
@@ -39,14 +49,29 @@ public class BossMoveMachine : MonoBehaviour
             currentMove.End();
             currentMove = null;
 
-            // start next move immediately (same frame)
-            if (queuedMoves.Count > 0)
-                PlayMoveImmediate(queuedMoves.Dequeue());
+            // queue the start for next frame
+            startNextFrame = true;
         }
     }
 
     public void PlayMove(string id)
     {
+        if (comboCounter > 3)
+        {
+            Debug.Log("Move Ignored! Too many moves in one combo!");
+            comboCounter = 0;
+            comboFin?.Invoke();
+            return;
+        }
+        if (id == "null")
+        {
+            Debug.Log("Combo Ended early!");
+            comboCounter = 0;
+            comboFin?.Invoke();
+            return;
+        }
+
+        comboCounter++;
         // if something is playing, queue it
         if (currentMove != null)
         {
@@ -83,39 +108,7 @@ public class BossMoveMachine : MonoBehaviour
     public void AnimEvent(string evt)
     {
         if (currentMove == null) return;
-        if (evt == "comboCheck")
-        {
-            // 1) identify current move
-            var moveType = currentMove.GetType();
 
-            // 2) did this move land a hit recently?
-            bool hit = HitConfirmed(moveType, 0.25f);
-
-            // 3) choose follow-up (example table)
-            string nextMoveId = null;
-
-            if (moveType == typeof(PosMeleeAttack))
-            {
-                nextMoveId = hit ? "posMelee2" : "posWavePush";
-            }
-            else if (moveType == typeof(WaterBlast))
-            {
-                nextMoveId = hit ? "posShotgun" : "posSmallShot";
-            }
-
-            // 4) if we picked something, queue it
-            if (!string.IsNullOrEmpty(nextMoveId))
-            {
-                // optional: ensure we end the current move right now
-                // (only do this if comboCheck is meant to be the end of the animation)
-                currentMove.isFinished = true;
-
-                // if you have a queue-enabled PlayMove, this is enough:
-                PlayMove(nextMoveId);
-            }
-
-            return;
-        }
         currentMove.AnimEvent(evt);
         
     }
@@ -128,4 +121,9 @@ public class BossMoveMachine : MonoBehaviour
 
     public bool HitConfirmed(Type moveType, float window = 0.25f)
     => lastHitMove == moveType && (Time.time - lastHitTime) <= window;
+
+    public string Choose(params string[] moves)
+    {
+        return moves[UnityEngine.Random.Range(0, moves.Length)];
+    }
 }

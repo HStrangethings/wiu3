@@ -16,12 +16,6 @@ public class WideWaterBlast : BossMove
     public override void Start()
     {
         Debug.Log("Starting WideWaterBlast");
-        foreach(GameObject p in proj)
-        {
-            var dealer = p.GetComponent<BossDamageDealer>();
-            dealer.sourceMove = GetType();
-            dealer.mm = boss.mm;
-        }
     }
     public override void Execute()
     {

@@ -35,7 +35,7 @@ public class BossStateMachine : MonoBehaviour
         }
         else
         {
-            UnityEngine.Debug.LogError($"State {type} not found in the state machine.");
+            Debug.LogError($"State {type} not found in the state machine.");
         }
     }
 

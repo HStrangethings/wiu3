@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BossBehaviour : MonoBehaviour
@@ -66,7 +67,6 @@ public class BossBehaviour : MonoBehaviour
         return Quaternion.identity;
     }
 
-
     public bool HasLOS()
     {
         if (player == null) return false;
@@ -89,6 +89,14 @@ public class BossBehaviour : MonoBehaviour
 
         // can see player
         return true;
+    }
+
+    public void BossMoveComboDetails(Type moveType,out bool hit, out bool LOS, out float dist)
+    {
+        hit = mm.HitConfirmed(moveType, 0.25f);
+        LOS = HasLOS();
+        Vector3 distF = DistanceToPlayer(); //naming abit wrong but wtv
+        dist = distF.magnitude;
     }
 
     private void OnDrawGizmos()

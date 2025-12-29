@@ -10,10 +10,11 @@ public class PosAttackState : BossState
         bossStat = boss.boss;
         boss.rb.linearVelocity = Vector3.zero;
 
-        if (boss.DistanceToPlayer().magnitude < bossStat.bossRad + bossStat.bossMeleeReach)
-        {
-            boss.mm.PlayMove("posMelee");
-        }
+        boss.mm.PlayMove("waterBlast");
+        //if (boss.DistanceToPlayer().magnitude < bossStat.bossRad + bossStat.bossMeleeReach)
+        //{
+        //    boss.mm.PlayMove("posMelee");
+        //}
     }
 
     public override void Execute()

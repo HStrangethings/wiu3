@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 954707338430777914}
   - component: {fileID: 6211382183580018581}
   - component: {fileID: 2491053503176751741}
-  - component: {fileID: 3976562335536510675}
+  - component: {fileID: 4612459413698129373}
   - component: {fileID: 1144857372923873748}
   - component: {fileID: 2605180030761342893}
   - component: {fileID: -3967361517493744591}
@@ -104,9 +104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scripts:
-  - {fileID: 3976562335536510675}
+  - {fileID: 4612459413698129373}
   - {fileID: 1144857372923873748}
---- !u!114 &3976562335536510675
+--- !u!114 &4612459413698129373
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1774211470298115458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b792b40316164c4eb9de2deaaa0d9d0, type: 3}
+  m_Script: {fileID: 11500000, guid: ed399210c67570849b62fc88a12dc0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
@@ -123,6 +123,7 @@ MonoBehaviour:
   isActive: 1
   hasVFX: 1
   impactVFX: {fileID: 9163852891436468882, guid: 8d2e981e6c85c794fa75a97ec8106eae, type: 3}
+  mm: {fileID: 0}
 --- !u!114 &1144857372923873748
 MonoBehaviour:
   m_ObjectHideFlags: 0

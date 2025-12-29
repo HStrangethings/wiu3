@@ -19,6 +19,8 @@ public class HitboxGroup : MonoBehaviour
 
     public void SetMoveMachines(BossMoveMachine mm)
     {
+        if (hitboxes == null || hitboxes.Length == 0)
+            hitboxes = GetComponentsInChildren<DamageDealer>(true);
         foreach (var d in hitboxes)
             if (d is IBossHitReporter r)
                 r.SetMoveMachine(mm);
@@ -26,6 +28,8 @@ public class HitboxGroup : MonoBehaviour
 
     public void SetHitReports(Type moveType)
     {
+        if (hitboxes == null || hitboxes.Length == 0)
+            hitboxes = GetComponentsInChildren<DamageDealer>(true);
         foreach (var d in hitboxes)
             if (d is IBossHitReporter r)
                 r.SetMoveType(moveType);
