@@ -11,6 +11,9 @@ public class WideWaterBlast : BossMove
         this.projSpeed = projSpeed;
     }
     private float timer = 0;
+    bool fired;
+    bool comboChecked;
+    private float comboCheckTime = 1.5f;
     private GameObject[] proj = new GameObject[3];
     private bool[] projCreated = new bool[3];
     public override void Start()
@@ -19,42 +22,42 @@ public class WideWaterBlast : BossMove
     }
     public override void Execute()
     {
-        if (timer < 5) { 
-            timer += Time.deltaTime;
-            float timeIntervals = 0.2f;
-            if (timer > timeIntervals && !projCreated[0])
-            {
-                projCreated[0] = true;
-                Vector3 localOffset = ArcPoint(0.35f, 7);
-                Vector3 spawn = boss.transform.TransformPoint(localOffset);
-                proj[0] = Object.Instantiate(boss.waterBlastProj, spawn, boss.transform.rotation,boss.transform);
-                proj[0].transform.localRotation *= Quaternion.Euler(0f, 25f, 0f);
-
-                SetupBossHitReporting(proj[0]);
-            }
-            if (timer > timeIntervals * 2 && !projCreated[1])
-            {
-                projCreated[1] = true;
-                Vector3 localOffset = ArcPoint(0.5f, 7);
-                Vector3 spawn = boss.transform.TransformPoint(localOffset);
-                proj[1] = Object.Instantiate(boss.waterBlastProj, spawn, boss.transform.rotation, boss.transform);
-                proj[1].transform.localRotation *= Quaternion.Euler(0f, 0f, 0f);
-
-                SetupBossHitReporting(proj[1]);
-            }
-            if (timer > timeIntervals * 3 && !projCreated[2])
-            {
-                projCreated[2] = true;
-                Vector3 localOffset = ArcPoint(0.65f, 7);
-                Vector3 spawn = boss.transform.TransformPoint(localOffset);
-                proj[2] = Object.Instantiate(boss.waterBlastProj, spawn, boss.transform.rotation, boss.transform);
-                proj[2].transform.localRotation *= Quaternion.Euler(0f, -25f, 0f);
-
-                SetupBossHitReporting(proj[2]);
-            }
-        }
-        else
+        timer += Time.deltaTime;
+        float timeIntervals = 0.2f;
+        if (!fired && timer > timeIntervals && !projCreated[0])
         {
+            projCreated[0] = true;
+            Vector3 localOffset = ArcPoint(0.35f, 7);
+            Vector3 spawn = boss.transform.TransformPoint(localOffset);
+            proj[0] = Object.Instantiate(boss.waterBlastProj, spawn, boss.transform.rotation, boss.transform);
+            proj[0].transform.localRotation *= Quaternion.Euler(0f, 25f, 0f);
+
+            SetupBossHitReporting(proj[0]);
+        }
+        if (!fired && timer > timeIntervals * 2 && !projCreated[1])
+        {
+            projCreated[1] = true;
+            Vector3 localOffset = ArcPoint(0.5f, 7);
+            Vector3 spawn = boss.transform.TransformPoint(localOffset);
+            proj[1] = Object.Instantiate(boss.waterBlastProj, spawn, boss.transform.rotation, boss.transform);
+            proj[1].transform.localRotation *= Quaternion.Euler(0f, 0f, 0f);
+
+            SetupBossHitReporting(proj[1]);
+        }
+        if (!fired && timer > timeIntervals * 3 && !projCreated[2])
+        {
+            projCreated[2] = true;
+            Vector3 localOffset = ArcPoint(0.65f, 7);
+            Vector3 spawn = boss.transform.TransformPoint(localOffset);
+            proj[2] = Object.Instantiate(boss.waterBlastProj, spawn, boss.transform.rotation, boss.transform);
+            proj[2].transform.localRotation *= Quaternion.Euler(0f, -25f, 0f);
+
+            SetupBossHitReporting(proj[2]);
+        }
+
+        if (!fired && timer >= 3f)
+        {
+            fired = true;
             foreach (GameObject p in proj)
             {
                 var projRb = p.GetComponent<Rigidbody>();
@@ -62,7 +65,24 @@ public class WideWaterBlast : BossMove
             }
             isFinished = true;
         }
+
+        if (!comboChecked && timer >= 3f + 0.2f && boss.mm.HitConfirmed(GetType()))
+        {
+            comboChecked = true;
+            AnimEvent("comboCheck");
+            isFinished = true;
+            return;
+        }
+
+        //call its own comboCheck instead of animation
+        if (!comboChecked && timer >= 3f + comboCheckTime)
+        {
+            comboChecked = true;
+            AnimEvent("comboCheck");
+            isFinished = true;
+        }
     }
+
     public override void End()
     {
         Debug.Log("Ending WaterBlast");
@@ -121,6 +141,27 @@ public class WideWaterBlast : BossMove
                         var projRb = p.GetComponent<Rigidbody>();
                         projRb.AddForce(projRb.transform.forward * projSpeed, ForceMode.Impulse);
                     }
+                }
+                isFinished = true;
+                break;
+            case "comboCheck":
+                boss.BossMoveComboDetails(GetType(), out bool hit, out bool LOS, out float dist);
+                Debug.Log(hit);
+
+                bool close = dist < 15f;
+                bool far = dist > 15f;
+                string nextMoveId = "null";
+
+                if (hit && !LOS) { nextMoveId = boss.mm.Choose("waterWave", "null", "null"); }
+                else if (hit && close) { nextMoveId = boss.mm.Choose("posMelee", "null", "posMelee"); }
+                else if (hit && far) { nextMoveId = boss.mm.Choose("waterBlast", "boatShield","boatShield", "null"); }
+                else if (!hit && LOS && far) { nextMoveId = boss.mm.Choose("boatShield", "waterBlast", "waterWave", "null"); }
+                else if (!hit && LOS && close) { nextMoveId = boss.mm.Choose("posMelee", "null"); }
+                else { nextMoveId = boss.mm.Choose("waterBlast", "posMelee", "null"); }
+
+                if (!string.IsNullOrEmpty(nextMoveId))
+                {
+                    boss.mm.PlayMove(nextMoveId);
                 }
                 isFinished = true;
                 break;

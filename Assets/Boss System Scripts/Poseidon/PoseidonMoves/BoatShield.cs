@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 public class BoatShield : BossMove
@@ -12,8 +13,18 @@ public class BoatShield : BossMove
         this.boss = boss;
         this.projHealth = projHealth;
     }
+    float timer = 0;
+    bool comboChecked = false;
     public override void Start()
     {
+        if (boss.shielded)
+        {
+            Debug.Log("Already shielded");
+            comboChecked = true;
+            AnimEvent("comboCheck");
+            return;
+        }
+
         Debug.Log("Starting BoatShield");
 
         Vector3 center = boss.transform.position;
@@ -49,12 +60,17 @@ public class BoatShield : BossMove
             damageable.health = projHealth;
             damageable.boats = boats;
         }
-
+        boss.shielded = true;
         boss.StartCoroutine(SpinBoats());
     }
     public override void Execute()
     {
-
+        if (!comboChecked && timer >= 0.5f)
+        {
+            comboChecked = true;
+            AnimEvent("comboCheck");
+            isFinished = true;
+        }
     }
     public override void End()
     {
@@ -70,6 +86,25 @@ public class BoatShield : BossMove
                 break;
 
             case "end":
+                isFinished = true;
+                break;
+            case "comboCheck":
+                boss.BossMoveComboDetails(GetType(), out bool hit, out bool LOS, out float dist);
+                Debug.Log(hit);
+
+                bool close = dist < 15f;
+                bool far = dist > 15f;
+                string nextMoveId = "null";
+
+                if (!LOS) { nextMoveId = boss.mm.Choose("wideWaterBlast", "null"); }
+                else if (close) { nextMoveId = boss.mm.Choose("posMelee", "wideWaterBlast", "posMelee"); }
+                else if (far) { nextMoveId = boss.mm.Choose("waterBlast", "boatShield", "null"); }
+                else { nextMoveId = boss.mm.Choose("waterBlast", "posMelee", "null"); }
+
+                if (!string.IsNullOrEmpty(nextMoveId))
+                {
+                    boss.mm.PlayMove(nextMoveId);
+                }
                 isFinished = true;
                 break;
         }

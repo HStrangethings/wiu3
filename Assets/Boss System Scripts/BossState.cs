@@ -15,4 +15,9 @@ public abstract class BossState
     public abstract void Execute();
 
     public abstract void Exit();
+
+    public virtual void ComboFin()
+    {
+        Exit();
+    }
 }

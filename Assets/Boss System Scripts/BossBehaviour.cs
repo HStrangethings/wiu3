@@ -31,6 +31,12 @@ public class BossBehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         hitboxManager = GetComponent<HitboxManager>();
+        mm.comboFin += GetComboFin;
+    }
+
+    private void OnDisable()
+    {
+        mm.comboFin -= GetComboFin;
     }
 
     public Vector3 DistanceToPlayer()
@@ -97,6 +103,11 @@ public class BossBehaviour : MonoBehaviour
         LOS = HasLOS();
         Vector3 distF = DistanceToPlayer(); //naming abit wrong but wtv
         dist = distF.magnitude;
+    }
+
+    public void GetComboFin()
+    {
+        sm.ComboFin();
     }
 
     private void OnDrawGizmos()

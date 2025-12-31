@@ -10,11 +10,21 @@ public class PosAttackState : BossState
         bossStat = boss.boss;
         boss.rb.linearVelocity = Vector3.zero;
 
-        boss.mm.PlayMove("waterBlast");
-        //if (boss.DistanceToPlayer().magnitude < bossStat.bossRad + bossStat.bossMeleeReach)
-        //{
-        //    boss.mm.PlayMove("posMelee");
-        //}
+        if (boss.DistanceToPlayer().magnitude < bossStat.bossRad + bossStat.bossMeleeReach)
+        {
+            boss.mm.PlayMove("posMelee");
+        }
+        else
+        {
+            if (boss.HasLOS())
+            {
+                boss.mm.PlayMove("waterBlast");
+            }
+            else
+            {
+                boss.mm.PlayMove("waterWave");
+            }
+        }
     }
 
     public override void Execute()
@@ -25,6 +35,13 @@ public class PosAttackState : BossState
 
     public override void Exit()
     {
-       // Debug.Log("Exitting Poseidon Attack State");
+        Debug.Log("Exitting Poseidon Attack State");
+       //boss.sm.ChangeState<PosIdleState>();
+    }
+
+    public override void ComboFin()
+    {
+        base.ComboFin();
+        boss.sm.ChangeState<PosIdleState>();
     }
 }

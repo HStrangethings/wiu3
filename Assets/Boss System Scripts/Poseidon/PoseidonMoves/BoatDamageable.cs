@@ -14,6 +14,8 @@ public class BoatDamageable : Damageable
     [HideInInspector]
     public GameObject[] boats = new GameObject[3];
 
+    private PoseidonBoss boss;
+
     private IEnumerator DamageEffect()
     {
         objectRenderer.material.color = damageColor;
@@ -34,6 +36,7 @@ public class BoatDamageable : Damageable
             originalColor = objectRenderer.material.color;
         }
         startHealth = health;
+        boss = GetComponentInParent<PoseidonBoss>();
     }
 
     private void Update()
@@ -66,5 +69,6 @@ public class BoatDamageable : Damageable
     {
         Destroy(boats[0]);
         Destroy(this.gameObject);
+        boss.shielded = false;
     }
 }

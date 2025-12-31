@@ -10,6 +10,8 @@ public class PoseidonBoss : BossBehaviour
     // list of all hitboxes
     public HitboxID Harms;
 
+    public bool shielded = false;
+
     public override void Start()
     {
         base.Start();

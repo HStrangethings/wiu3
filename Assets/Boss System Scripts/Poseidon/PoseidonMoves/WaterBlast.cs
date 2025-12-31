@@ -79,17 +79,19 @@ public class WaterBlast : BossMove
 
                 bool close = dist < 15f;
                 bool far = dist > 15f;
-                string nextMoveId = "";
+                string nextMoveId = "null";
 
                 if (hit && !LOS) { nextMoveId = boss.mm.Choose("waterWave","null"); }
                 else if (hit && close) { nextMoveId = boss.mm.Choose("posMelee", "wideWaterBlast"); }
-                else if (hit && far) { nextMoveId = boss.mm.Choose("waterWave", "boatShield"); }
-                //else { nextMoveId = boss.mm.Choose("waterWave", "posMelee", "null"); }
+                else if (hit && far) { nextMoveId = boss.mm.Choose("waterWave", "boatShield", "null"); }
+                else if (!hit && LOS) { nextMoveId = boss.mm.Choose("wideWaterBlast", "waterWave"); }
+                else { nextMoveId = boss.mm.Choose("waterWave", "posMelee", "null"); }
 
                 if (!string.IsNullOrEmpty(nextMoveId))
                 {
                     boss.mm.PlayMove(nextMoveId);
                 }
+                isFinished = true;
                 break;
         }
     }

@@ -43,4 +43,9 @@ public class BossStateMachine : MonoBehaviour
     {
         currentState?.Execute();
     }
+
+    public void ComboFin()
+    {
+        currentState.ComboFin();
+    }
 }

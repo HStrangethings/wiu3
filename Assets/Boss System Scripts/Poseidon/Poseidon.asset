@@ -20,5 +20,5 @@ MonoBehaviour:
   health: 100
   atk: 50
   speed: 2
-  bossRad: 0
-  bossMeleeReach: 0
+  bossRad: 6
+  bossMeleeReach: 6

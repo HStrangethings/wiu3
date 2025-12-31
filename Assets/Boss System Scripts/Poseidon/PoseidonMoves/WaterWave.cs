@@ -14,6 +14,9 @@ public class WaterWave : BossMove
         this.chargeUpTime = chargeUpTime;
     }
     private float timer = 0;
+    bool fired;
+    bool comboChecked;
+    private float comboCheckTime = 1.5f;
     private GameObject proj;
     public override void Start()
     {
@@ -24,22 +27,44 @@ public class WaterWave : BossMove
     }
     public override void Execute()
     {
-        if (timer < 3)
-        {
-            timer += Time.deltaTime;
 
+        timer += Time.deltaTime;
+
+        if (!fired && timer <= 3f)
+        {
             float t = Mathf.Clamp01(timer);
             float scaleY = Mathf.Lerp(0, boss.waterWaveProj.transform.localScale.y, t);
             proj.transform.localScale = new Vector3(xSize, scaleY, boss.waterWaveProj.transform.localScale.z);
         }
-        else
+
+        if (!fired && timer >= 3f)
         {
-            proj.transform.localScale = new Vector3(xSize, boss.waterWaveProj.transform.localScale.y, boss.waterWaveProj.transform.localScale.z);
-            var projRb = proj.GetComponent<Rigidbody>();
-            projRb.AddForce(projRb.transform.forward * projSpeed, ForceMode.Impulse);
+            fired = true;
+            if (proj != null)
+            {
+                proj.transform.localScale = new Vector3(xSize, boss.waterWaveProj.transform.localScale.y, boss.waterWaveProj.transform.localScale.z);
+                var projRb = proj.GetComponent<Rigidbody>();
+                projRb.AddForce(projRb.transform.forward * projSpeed, ForceMode.Impulse);
+            }
+        }
+
+        if (!comboChecked && timer >= 3f + 0.2f && boss.mm.HitConfirmed(GetType()))
+        {
+            comboChecked = true;
+            AnimEvent("comboCheck");
+            isFinished = true;
+            return;
+        }
+
+        //call its own comboCheck instead of animation
+        if (!comboChecked && timer >= 3f + comboCheckTime)
+        {
+            comboChecked = true;
+            AnimEvent("comboCheck");
             isFinished = true;
         }
     }
+
     public override void End()
     {
         Debug.Log("Ending WaterWave");
@@ -56,6 +81,26 @@ public class WaterWave : BossMove
             case"end":
                 var projRb = proj.GetComponent<Rigidbody>();
                 projRb.AddForce(projRb.transform.forward * projSpeed, ForceMode.Impulse);
+                isFinished = true;
+                break;
+            case "comboCheck":
+                boss.BossMoveComboDetails(GetType(), out bool hit, out bool LOS, out float dist);
+                Debug.Log(hit);
+
+                bool close = dist < 15f;
+                bool far = dist > 15f;
+                string nextMoveId = "null";
+
+                if (hit && !LOS) { nextMoveId = boss.mm.Choose("wideWaterBlast", "null"); }
+                else if (hit && close) { nextMoveId = boss.mm.Choose("posMelee", "wideWaterBlast", "posMelee"); }
+                else if (hit && far) { nextMoveId = boss.mm.Choose("waterBlast", "boatShield", "null"); }
+                else if (!hit && LOS) { nextMoveId = boss.mm.Choose("wideWaterBlast", "waterWave"); }
+                else { nextMoveId = boss.mm.Choose("waterBlast", "posMelee", "null"); }
+
+                if (!string.IsNullOrEmpty(nextMoveId))
+                {
+                    boss.mm.PlayMove(nextMoveId);
+                }
                 isFinished = true;
                 break;
         }

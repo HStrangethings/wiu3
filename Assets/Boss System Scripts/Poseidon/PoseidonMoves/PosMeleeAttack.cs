@@ -22,6 +22,7 @@ public class PosMeleeAttack : BossMove
     public override void End()
     {
         Debug.Log("Ending PosMeleeAttack");
+        boss.hitboxManager.SetGroup(boss.Harms, false);
         boss.animator.Play("New State");
         base.End();
     }
@@ -36,6 +37,27 @@ public class PosMeleeAttack : BossMove
 
             case "end":
                 boss.hitboxManager.SetGroup(boss.Harms, false);
+                break;
+            case "comboCheck":
+                boss.BossMoveComboDetails(GetType(), out bool hit, out bool LOS, out float dist);
+                Debug.Log(hit);
+
+                bool close = dist < 15f;
+                bool far = dist > 15f;
+                string nextMoveId = "null";
+
+                if (hit && !LOS) { nextMoveId = boss.mm.Choose("waterWave", "null","waterWave"); }
+                else if (hit && close) { nextMoveId = boss.mm.Choose("posMelee", "null", "posMelee"); }
+                else if (hit && far) { nextMoveId = boss.mm.Choose("waterBlast", "boatShield", "boatShield", "null"); }
+                else if (!hit && LOS && far) { nextMoveId = boss.mm.Choose("boatShield", "waterBlast", "waterWave", "null"); }
+                else if (!hit && LOS && close) { nextMoveId = boss.mm.Choose("posMelee", "null"); }
+                else { nextMoveId = boss.mm.Choose("waterBlast", "posMelee", "null"); }
+
+                if (!string.IsNullOrEmpty(nextMoveId))
+                {
+                    boss.mm.PlayMove(nextMoveId);
+                }
+                isFinished = true;
                 break;
         }
     }
