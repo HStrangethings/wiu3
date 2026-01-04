@@ -5,42 +5,67 @@ public class PosIdleState : BossState
 {
     public PosIdleState(BossStateMachine sm, BossBehaviour boss) : base(sm, boss) { }
     private float timer = 0;
-    private float randomCooldown = 0;
+
+    bool LOS = false;
+    bool needMove = false;
+    float idleDur = 0;
+
+    BossStats bossStat;
 
     public override void Enter()
     {
         timer = 0;
-        //Debug.Log("Entering Poseidon Idle State");
+
+        bossStat = boss.boss;
+        idleDur = Random.Range(2f, 4.5f);
+
+        LOS = boss.HasLOS();
+        if (!LOS) { needMove = true; return; }
+        int r = Random.Range(0, 100);
+        if ( r < 50)
+        {
+            needMove = true;
+        }
     }
 
     public override void Execute()
     {
         //Debug.Log("Currently in Poseidon Idle State");
-        if (timer < 3f) { 
-            timer += Time.deltaTime; 
-            //Debug.Log("Idleing");
-            }
-        else
-        {
-            if (randomCooldown < 0.5) { randomCooldown += Time.deltaTime; }
-            else
+        if (timer < idleDur) { 
+            timer += Time.deltaTime;
+
+            float timeRemaining = idleDur - timer;
+
+            if (boss.DistanceToPlayer().magnitude < bossStat.bossRad + bossStat.bossMeleeReach)
             {
-                randomCooldown = 0;
-                Debug.Log("rolling random number");
-                int r = UnityEngine.Random.Range(0, 100);
-                if (r > 0)
+                if (timeRemaining > 0.5f)
                 {
-                    Debug.Log("Entering AttackState");
-                    Vector3 distVect = boss.player.transform.position - boss.transform.position;
-                    float dist = distVect.magnitude;
-                    if (dist > 2) { sm.ChangeState<PosAttackState>(); return; }
+                    timer += 0.4f; //if theres still quite abit of time, make it faster since player is so close
                 }
-                else { Debug.Log("random number failed"); }
+            }
+
+            if (timeRemaining < 0.1f)
+            {
+                if (boss.DistanceToPlayer().magnitude > 40)
+                {
+                    idleDur += 2f; //if timer finish, but player still too far away, extend time first
+                }
             }
         }
+        else
+        {
+            Debug.Log("Entering AttackState");
+            sm.ChangeState<PosAttackState>(); 
+            return;
+            
+        }
 
-        Vector3 chasePlayerVel = boss.MoveToPlayer();
-        boss.rb.linearVelocity = chasePlayerVel;
+        if (needMove)
+        {
+            Vector3 chasePlayerVel = boss.MoveToPlayer();
+            boss.rb.linearVelocity = chasePlayerVel;
+        }
+        else { boss.rb.linearVelocity = Vector3.zero; }
         Quaternion rotateToPlayer = boss.RotateToPlayer();
         boss.transform.rotation = rotateToPlayer;
     }

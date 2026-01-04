@@ -18,5 +18,19 @@ public abstract class BossMove
     {
         isFinished = true;
     }
+    public abstract void AnimEvent(string evt);
+    public abstract BossMove Clone();
+
+
+    public void SetupBossHitReporting(GameObject go)
+    {
+        if (go == null) return;
+
+        var dealer = go.GetComponent<BossDamageDealer>();
+        if (dealer == null) return;
+
+        dealer.sourceMove = GetType();
+        dealer.mm = boss.mm;
+    }
 
 }

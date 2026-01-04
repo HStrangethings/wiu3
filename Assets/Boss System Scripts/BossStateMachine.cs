@@ -35,12 +35,17 @@ public class BossStateMachine : MonoBehaviour
         }
         else
         {
-            UnityEngine.Debug.LogError($"State {type} not found in the state machine.");
+            Debug.LogError($"State {type} not found in the state machine.");
         }
     }
 
     private void Update()
     {
         currentState?.Execute();
+    }
+
+    public void ComboFin()
+    {
+        currentState.ComboFin();
     }
 }
