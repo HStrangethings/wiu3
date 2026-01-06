@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 24b0c9d25166fb14499ef1a5c36ec47e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - database: {instanceID: 0}
+  - currentPreset: {instanceID: 0}
+  - animator: {instanceID: 0}
+  - baseController: {fileID: 9100000, guid: 986daadaea4681c43adac7b7b5725de0, type: 2}
+  - abilityPlaceholderClip: {fileID: 7400000, guid: ef7536db3e113094c8211899d9848e29, type: 2}
+  - projectileSpawnPoint: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -12,13 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5bc9d2d7162bea4fbe7124f9beac5d1, type: 3}
   m_Name: sword
   m_EditorClassIdentifier: 
-  id: 
-  displayName: 
+  id: 1
+  displayName: sword
   description: 
   icon: {fileID: 0}
-  element: 0
-  baseDamage: 20
-  idle: {fileID: 0}
-  equip: {fileID: 0}
-  unequip: {fileID: 0}
-  abilities: []
+  idle:
+    clip: {fileID: -203655887218126122, guid: 1551ea9027fc1764c8080e7b30d6a1d4, type: 3}
+    useOverrideDuration: 0
+    overrideDuration: 0
+  equip:
+    clip: {fileID: 0}
+    useOverrideDuration: 0
+    overrideDuration: 0
+  unequip:
+    clip: {fileID: 0}
+    useOverrideDuration: 0
+    overrideDuration: 0
+  abilities:
+  - name: attack
+    clip: {fileID: 7400000, guid: 0e1e6bcdf63438845934ad50a6ff8eb8, type: 2}
+    activationKey: 101
+    mode: 0
+    element: 0
+    baseDamage: 20
+    critChance: 0.18
+    statusEffects: []
+    projectilePrefab: {fileID: 0}
+    useOverrideDuration: 0
+    overrideDuration: 0
