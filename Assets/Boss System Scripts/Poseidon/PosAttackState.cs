@@ -1,30 +1,14 @@
 using UnityEngine;
 
-public class PosAttackState : BossState
+public class LokiAttackState : BossState
 {
-    public PosAttackState(BossStateMachine sm, BossBehaviour boss) : base(sm, boss) { }
+    public LokiAttackState(BossStateMachine sm, BossBehaviour boss) : base(sm, boss) { }
     BossStats bossStat;
 
     public override void Enter()
     {
         bossStat = boss.boss;
         boss.rb.linearVelocity = Vector3.zero;
-
-        if (boss.DistanceToPlayer().magnitude < bossStat.bossRad + bossStat.bossMeleeReach)
-        {
-            boss.mm.PlayMove("posMelee");
-        }
-        else
-        {
-            if (boss.HasLOS())
-            {
-                boss.mm.PlayMove("waterBlast");
-            }
-            else
-            {
-                boss.mm.PlayMove("waterWave");
-            }
-        }
     }
 
     public override void Execute()
@@ -42,6 +26,6 @@ public class PosAttackState : BossState
     public override void ComboFin()
     {
         base.ComboFin();
-        boss.sm.ChangeState<PosIdleState>();
+        boss.sm.ChangeState<LokiIdleState>();
     }
 }
