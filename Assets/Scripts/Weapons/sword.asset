@@ -30,7 +30,7 @@ MonoBehaviour:
     overrideDuration: 0
   abilities:
   - name: attack
-    clip: {fileID: -203655887218126122, guid: db2a6fc5ba93e1a4e939014ba5dbe8d6, type: 3}
+    clip: {fileID: 7400000, guid: 0e1e6bcdf63438845934ad50a6ff8eb8, type: 2}
     activationKey: 101
     mode: 0
     element: 0

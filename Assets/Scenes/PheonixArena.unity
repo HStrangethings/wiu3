@@ -140,9 +140,7 @@ MonoBehaviour:
   weaponPresetId: 1
   currentPreset: {fileID: 11400000, guid: aa0a72157842946458d8738033bbfe2a, type: 2}
   animator: {fileID: 167019744}
-  baseController: {fileID: 9100000, guid: 986daadaea4681c43adac7b7b5725de0, type: 2}
-  abilityPlaceholderClip: {fileID: 7400000, guid: ef7536db3e113094c8211899d9848e29, type: 2}
-  abilityStateName: Ability
+  crossFadeTime: 0.05
   projectileSpawnPoint: {fileID: 0}
   lockoutDuringAbility: 1
 --- !u!95 &167019744
@@ -154,11 +152,11 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167019741}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 1551ea9027fc1764c8080e7b30d6a1d4, type: 3}
   m_Controller: {fileID: 9100000, guid: 986daadaea4681c43adac7b7b5725de0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -167,6 +165,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &167019745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167019741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e50801bfe94b1418e818b6434af143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitboxManager: {fileID: 167019747}
+--- !u!114 &167019747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167019741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c57e0569713674d987c0c86cf03ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &297999591
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,6 +471,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db2a6fc5ba93e1a4e939014ba5dbe8d6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 167019744}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db2a6fc5ba93e1a4e939014ba5dbe8d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 167019745}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db2a6fc5ba93e1a4e939014ba5dbe8d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 167019747}
   m_SourcePrefab: {fileID: 100100000, guid: db2a6fc5ba93e1a4e939014ba5dbe8d6, type: 3}
 --- !u!1 &683052964
 GameObject:
@@ -699,6 +728,77 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1262066417}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1299162761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1299162762}
+  - component: {fileID: 1299162764}
+  - component: {fileID: 1299162763}
+  m_Layer: 9
+  m_Name: hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1299162762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299162761}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.369236, z: 1.3276}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1800510184}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1299162763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299162761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b792b40316164c4eb9de2deaaa0d9d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  damageName: 
+  isActive: 0
+  hasVFX: 0
+  impactVFX: {fileID: 0}
+--- !u!65 &1299162764
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299162761}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1375878405
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +955,8 @@ GameObject:
   - component: {fileID: 1800510187}
   - component: {fileID: 1800510186}
   - component: {fileID: 1800510185}
-  m_Layer: 0
+  - component: {fileID: 1800510188}
+  m_Layer: 3
   m_Name: sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -874,7 +975,8 @@ Transform:
   m_LocalPosition: {x: -0.334, y: 0.1, z: 0.019}
   m_LocalScale: {x: 0.74885696, y: 0.03377647, z: 0.044337604}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1299162762}
   m_Father: {fileID: 1148987220}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1800510185
@@ -951,6 +1053,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800510183}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1800510188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800510183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec1aefd7000be74fa6b9811dc745251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: {fileID: 11400000, guid: d79b12ea94f61d64a8a94845fa6fd822, type: 2}
 --- !u!1 &1945576099
 GameObject:
   m_ObjectHideFlags: 0

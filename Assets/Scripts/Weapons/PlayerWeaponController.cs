@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class PlayerWeaponController : MonoBehaviour
 {
@@ -8,32 +7,23 @@ public class PlayerWeaponController : MonoBehaviour
     public string weaponPresetId;
     public WeaponPreset currentPreset;
 
-    [Header("Animation")]
+    [Header("Animator")]
     public Animator animator;
 
-    [Tooltip("Your base AnimatorController (the one with the placeholder clip in it).")]
-    public RuntimeAnimatorController baseController;
-
-    [Tooltip("The clip inside the base controller that will be replaced at runtime.")]
-    public AnimationClip abilityPlaceholderClip;
-
-    [Tooltip("Animator state name to play when an ability is used (must exist in the controller).")]
-    public string abilityStateName = "Ability";
+    [Tooltip("Small blend time when switching to ability states.")]
+    public float crossFadeTime = 0.05f;
 
     [Header("Ranged")]
     public Transform projectileSpawnPoint;
 
-    [Header("Behavior")]
+    [Header("Behaviour")]
     public bool lockoutDuringAbility = true;
 
-    AnimatorOverrideController overrideController;
-    readonly Dictionary<int, float> cooldownUntil = new();
     float busyUntil = 0f;
 
     void Awake()
     {
         if (!animator) animator = GetComponentInChildren<Animator>();
-        SetupAnimatorOverride();
         EquipById(weaponPresetId);
     }
 
@@ -41,17 +31,17 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (!currentPreset || currentPreset.abilities == null) return;
 
-        // Optional lockout
         if (lockoutDuringAbility && Time.time < busyUntil) return;
 
         for (int i = 0; i < currentPreset.abilities.Length; i++)
         {
-            var ability = currentPreset.abilities[i];
-            if (ability.activationKey == KeyCode.None) continue;
+            var a = currentPreset.abilities[i];
+            if (a.activationKey == KeyCode.None) continue;
 
-            if (Input.GetKeyDown(ability.activationKey))
+            if (Input.GetKeyDown(a.activationKey))
             {
-                TryUseAbility(i);
+                UseAbility(i);
+                break;
             }
         }
     }
@@ -62,94 +52,87 @@ public class PlayerWeaponController : MonoBehaviour
 
         if (!database)
         {
-            Debug.LogWarning("PlayerWeaponController: No WeaponDatabase assigned.");
+            Debug.LogError("PlayerWeaponController: WeaponDatabase not assigned.");
             currentPreset = null;
             return;
         }
 
         currentPreset = database.GetById(id);
+
         if (!currentPreset)
-            Debug.LogWarning($"PlayerWeaponController: Weapon preset not found for id '{id}'.");
+            Debug.LogError($"PlayerWeaponController: No WeaponPreset found for id '{id}' (case-sensitive).");
+        else
+            Debug.Log($"Equipped: {currentPreset.displayName} (id={currentPreset.id})");
     }
 
-    public void TryUseAbility(int abilityIndex)
+    void UseAbility(int index)
     {
         if (!currentPreset) return;
-        if (abilityIndex < 0 || abilityIndex >= currentPreset.abilities.Length) return;
+        if (index < 0 || index >= currentPreset.abilities.Length) return;
 
-        // cooldown check
-        if (cooldownUntil.TryGetValue(abilityIndex, out var until) && Time.time < until)
+        var a = currentPreset.abilities[index];
+
+        // Determine which animator state to play
+        // Priority: animatorStateName -> clip.name (fallback)
+        string stateName = null;
+
+        // If you added animatorStateName to AbilityEntry:
+        var stateField = a.GetType().GetField("animatorStateName");
+        if (stateField != null)
+            stateName = stateField.GetValue(a) as string;
+
+        if (string.IsNullOrWhiteSpace(stateName))
+            stateName = a.clip ? a.clip.name : null;
+
+        if (string.IsNullOrWhiteSpace(stateName))
+        {
+            Debug.LogWarning($"Ability '{a.name}' has no animatorStateName and no clip assigned.");
             return;
+        }
 
-        var a = currentPreset.abilities[abilityIndex];
+        // Play animation state by name (no transitions needed)
+        if (animator)
+        {
+            // Works even without transitions; it jumps into that state directly.
+            animator.CrossFade(stateName, crossFadeTime, 0, 0f);
+        }
+        else
+        {
+            Debug.LogWarning("PlayerWeaponController: No Animator assigned/found.");
+        }
 
-        // Animation
-        PlayAbilityAnimation(a.clip);
-
-        // If ranged, spawn projectile
+        // Spawn projectile if ranged
         if (a.mode == AbilityMode.Ranged)
             SpawnProjectile(a);
 
-        // set cooldown
-        float cd = Mathf.Max(0f, a.useOverrideDuration ? 0f : 0f); // not tying to duration; cooldown is separate if you add it later
-        // NOTE: your current AbilityEntry doesn't include cooldown; if you want it, add it back and use it here.
-        // For now, no cooldown field. If you do have one in your struct, replace this with: float cd = Mathf.Max(0f, a.cooldown);
-
-        // Basic lockout using duration (clip length or override)
+        // Optional lockout using your duration override or clip length
         if (lockoutDuringAbility)
         {
-            float dur = a.GetDuration();
+            float dur = a.GetDuration(); // uses override if enabled, else clip length
             busyUntil = Time.time + Mathf.Max(0f, dur);
         }
 
-        // If you later add a cooldown field, set:
-        // cooldownUntil[abilityIndex] = Time.time + cd;
+        Debug.Log($"Ability '{a.name}' -> Played Animator state '{stateName}' (mode={a.mode})");
     }
 
     void SpawnProjectile(AbilityEntry a)
     {
         if (!a.projectilePrefab)
         {
-            Debug.LogWarning($"Ability '{a.name}' is Ranged but has no projectilePrefab assigned.");
+            Debug.LogWarning($"Ability '{a.name}' is Ranged but projectilePrefab is empty.");
             return;
         }
         if (!projectileSpawnPoint)
         {
-            Debug.LogWarning("PlayerWeaponController: No projectileSpawnPoint assigned.");
+            Debug.LogWarning("PlayerWeaponController: projectileSpawnPoint is not assigned.");
             return;
         }
 
         var go = Instantiate(a.projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
 
-        // Optional: pass damage/crit/element/status to projectile if it has a receiver
+        // Optional payload (if your projectile uses it)
         //var receiver = go.GetComponent<ProjectilePayloadReceiver>();
         //if (receiver)
         //    receiver.SetPayload(a.baseDamage, a.critChance, a.element, a.statusEffects);
-    }
-
-    void SetupAnimatorOverride()
-    {
-        if (!animator || !baseController || !abilityPlaceholderClip) return;
-
-        overrideController = new AnimatorOverrideController(baseController);
-        animator.runtimeAnimatorController = overrideController;
-    }
-
-    void PlayAbilityAnimation(AnimationClip clip)
-    {
-        if (!animator) return;
-
-        // If you didn’t set up override, just try to play the state anyway
-        if (!overrideController || !abilityPlaceholderClip || !clip)
-        {
-            if (!string.IsNullOrEmpty(abilityStateName))
-                animator.Play(abilityStateName, 0, 0f);
-            return;
-        }
-
-        overrideController[abilityPlaceholderClip] = clip;
-
-        if (!string.IsNullOrEmpty(abilityStateName))
-            animator.Play(abilityStateName, 0, 0f);
     }
 }
