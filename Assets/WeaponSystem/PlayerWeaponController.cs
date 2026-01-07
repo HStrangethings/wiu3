@@ -31,6 +31,7 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (!currentPreset || currentPreset.abilities == null) return;
 
+        //?
         if (lockoutDuringAbility && Time.time < busyUntil) return;
 
         for (int i = 0; i < currentPreset.abilities.Length; i++)
@@ -49,7 +50,8 @@ public class PlayerWeaponController : MonoBehaviour
     public void EquipById(string id)
     {
         weaponPresetId = id;
-
+        
+        //if like that then just remove the whole database, no point
         if (!database)
         {
             Debug.LogError("PlayerWeaponController: WeaponDatabase not assigned.");
@@ -77,6 +79,7 @@ public class PlayerWeaponController : MonoBehaviour
         string stateName = null;
 
         // If you added animatorStateName to AbilityEntry:
+        //?
         var stateField = a.GetType().GetField("animatorStateName");
         if (stateField != null)
             stateName = stateField.GetValue(a) as string;

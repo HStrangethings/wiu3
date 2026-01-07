@@ -36,21 +36,21 @@ public class PosIdleState : BossState
 
             float timeRemaining = idleDur - timer;
 
-            if (boss.DistanceToPlayer().magnitude < bossStat.bossRad + bossStat.bossMeleeReach)
-            {
-                if (timeRemaining > 0.5f)
-                {
-                    timer += 0.4f; //if theres still quite abit of time, make it faster since player is so close
-                }
-            }
+            //if (boss.DistanceToPlayer().magnitude < bossStat.bossRad + bossStat.bossMeleeReach)
+            //{
+            //    if (timeRemaining > 0.5f)
+            //    {
+            //        timer += 0.4f; //if theres still quite abit of time, make it faster since player is so close
+            //    }
+            //}
 
-            if (timeRemaining < 0.1f)
-            {
-                if (boss.DistanceToPlayer().magnitude > 40)
-                {
-                    idleDur += 2f; //if timer finish, but player still too far away, extend time first
-                }
-            }
+            //if (timeRemaining < 0.1f)
+            //{
+            //    if (boss.DistanceToPlayer().magnitude > 40)
+            //    {
+            //        idleDur += 2f; //if timer finish, but player still too far away, extend time first
+            //    }
+            //}
         }
         else
         {

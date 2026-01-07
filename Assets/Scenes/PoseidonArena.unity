@@ -552,6 +552,7 @@ MonoBehaviour:
   boatShieldProj: {fileID: 4020364477387475579, guid: 5c7a1ee1ee2a2974da6792b59d3371c7, type: 3}
   actualShield: {fileID: 2056909079819164649, guid: 881971ea09640a6459ac59d66f8a544e, type: 3}
   Harms: {fileID: 11400000, guid: 81edd57623e9612409d561f1d2ec0c8e, type: 2}
+  shielded: 0
 --- !u!54 &418427184
 Rigidbody:
   m_ObjectHideFlags: 0
