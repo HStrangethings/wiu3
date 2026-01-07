@@ -16,10 +16,10 @@ MonoBehaviour:
   _maxHealth: 100
   _res: 0.1
   _maxSpeed: 10
-  _speed: 10
+  _speed: 50
   _sprintMul: 1.5
   _crouchMul: 0.7
-  _jumpHeight: 2
+  _jumpHeight: 10
   _standingHeight: 2
   _crouchingHeight: 1
   _dmg: 0
