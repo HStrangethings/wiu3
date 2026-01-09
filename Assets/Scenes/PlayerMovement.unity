@@ -425,7 +425,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  groundRayLength: 1.1
+  groundRayLength: 0
   bobbingOffset: 0
   bobbingFreq: 0
   bobbingAmp: 0
