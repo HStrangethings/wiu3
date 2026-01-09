@@ -2,10 +2,8 @@ using UnityEngine;
 
 public class PlayerWeaponController : MonoBehaviour
 {
-    [Header("Weapon Selection")]
-    public WeaponDatabase database;
-    public string weaponPresetId;
     public WeaponPreset currentPreset;
+    public HitboxManager hitboxManager;
 
     [Header("Animator")]
     public Animator animator;
@@ -24,7 +22,6 @@ public class PlayerWeaponController : MonoBehaviour
     void Awake()
     {
         if (!animator) animator = GetComponentInChildren<Animator>();
-        EquipById(weaponPresetId);
     }
 
     void Update()
@@ -45,26 +42,6 @@ public class PlayerWeaponController : MonoBehaviour
                 break;
             }
         }
-    }
-
-    public void EquipById(string id)
-    {
-        weaponPresetId = id;
-        
-        //if like that then just remove the whole database, no point
-        if (!database)
-        {
-            Debug.LogError("PlayerWeaponController: WeaponDatabase not assigned.");
-            currentPreset = null;
-            return;
-        }
-
-        currentPreset = database.GetById(id);
-
-        if (!currentPreset)
-            Debug.LogError($"PlayerWeaponController: No WeaponPreset found for id '{id}' (case-sensitive).");
-        else
-            Debug.Log($"Equipped: {currentPreset.displayName} (id={currentPreset.id})");
     }
 
     void UseAbility(int index)
@@ -104,9 +81,8 @@ public class PlayerWeaponController : MonoBehaviour
             Debug.LogWarning("PlayerWeaponController: No Animator assigned/found.");
         }
 
-        // Spawn projectile if ranged
-        if (a.mode == AbilityMode.Ranged)
-            SpawnProjectile(a);
+        AbilityFunction();
+
 
         // Optional lockout using your duration override or clip length
         if (lockoutDuringAbility)
@@ -114,28 +90,29 @@ public class PlayerWeaponController : MonoBehaviour
             float dur = a.GetDuration(); // uses override if enabled, else clip length
             busyUntil = Time.time + Mathf.Max(0f, dur);
         }
-
-        Debug.Log($"Ability '{a.name}' -> Played Animator state '{stateName}' (mode={a.mode})");
     }
 
-    void SpawnProjectile(AbilityEntry a)
+
+    //wtv monobehaviour function u might need per ability, eg.spawning projectile
+    public void AbilityFunction()
     {
-        if (!a.projectilePrefab)
+        switch (currentPreset.name)
         {
-            Debug.LogWarning($"Ability '{a.name}' is Ranged but projectilePrefab is empty.");
-            return;
+            case "sword":
+                break;
         }
-        if (!projectileSpawnPoint)
-        {
-            Debug.LogWarning("PlayerWeaponController: projectileSpawnPoint is not assigned.");
-            return;
-        }
+    }
 
-        var go = Instantiate(a.projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+    public void EnableHitbox(HitboxID id)
+    {
+        if (hitboxManager && id)
+            hitboxManager.SetGroup(id, true);
+    }
 
-        // Optional payload (if your projectile uses it)
-        //var receiver = go.GetComponent<ProjectilePayloadReceiver>();
-        //if (receiver)
-        //    receiver.SetPayload(a.baseDamage, a.critChance, a.element, a.statusEffects);
+    // Called by Animation Event
+    public void DisableHitbox(HitboxID id)
+    {
+        if (hitboxManager && id)
+            hitboxManager.SetGroup(id, false);
     }
 }

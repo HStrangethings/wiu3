@@ -37,16 +37,12 @@ public struct AbilityEntry
     public KeyCode activationKey;        // e.g., Q/E/Mouse1
 
     [Header("Mode & Combat")]
-    public AbilityMode mode;             // Melee / Ranged
     public ElementType element;          // Physical / Magic
     [Min(0f)] public float baseDamage;
     [Range(0f, 1f)] public float critChance;
 
     [Header("Optional Status Effects")]
     public StatusEffectSpec[] statusEffects;
-
-    // Ranged-only
-    public GameObject projectilePrefab;
 
     [Header("Optional Runtime Override")]
     public bool useOverrideDuration;
