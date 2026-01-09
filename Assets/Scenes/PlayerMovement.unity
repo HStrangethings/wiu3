@@ -268,8 +268,8 @@ GameObject:
   - component: {fileID: 318126331}
   - component: {fileID: 318126330}
   - component: {fileID: 318126329}
-  - component: {fileID: 318126335}
   - component: {fileID: 318126336}
+  - component: {fileID: 318126337}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -369,33 +369,6 @@ Transform:
   - {fileID: 37584973}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &318126335
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 318126328}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &318126336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,14 +382,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 32e813893b0bd5141a685aab1e583357, type: 2}
+  velocity: {x: 0, y: 0, z: 0}
   sliding: 0
   mouseSmoothTime: 0.03
   mouseSensitivity: 1
   Gravity: 13
-  Friction: 2
+  Friction: 25
   movementSens: 0.1
+  acceleration: 20
   MaxJump: 1
-  HorizontalVelocity: 0
+  targetVelocity: 0
   VerticalVelocity: 0
   moveDirection: {x: 0, y: 0, z: 0}
   isGrounded: 0
@@ -441,6 +416,31 @@ MonoBehaviour:
   throwForce: 0
   stateText: {fileID: 0}
   VelocityText: {fileID: 0}
+--- !u!143 &318126337
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318126328}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &467064318
 GameObject:
   m_ObjectHideFlags: 0

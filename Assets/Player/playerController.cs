@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody rb;
+    private CharacterController characterController;
     public PlayerData playerData;
+    public Vector3 velocity;
 
     #region FSM
     //Simple FSM
@@ -43,6 +44,8 @@ public class PlayerController : MonoBehaviour
     public float Gravity = 9.8f;
     public float Friction = 1.0f;
     public float movementSens = 0.1f;
+    public float acceleration = 1;
+    private bool canMove = true;
 
     private float speed;
     private float maxSpeed;
@@ -60,7 +63,7 @@ public class PlayerController : MonoBehaviour
     private float yRotation = 0.0f;
 
     //movement
-    public float HorizontalVelocity;
+    public float targetVelocity;
     public float VerticalVelocity;
     public Vector3 moveDirection;
     public bool isGrounded = false;
@@ -124,7 +127,7 @@ public class PlayerController : MonoBehaviour
         currentXState = STATE.IDLE;
         currentYState = STATE.INAIR;
 
-        rb = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
 
         //for camera bobbing
         originalCamY = Camera.main.transform.localPosition.y;
@@ -164,9 +167,9 @@ public class PlayerController : MonoBehaviour
     }
     private void LateUpdate()
     {
-        Look();
+        //Look();
 
-        CameraEffects();
+        //CameraEffects();
     }
     private void SizeUpdate()
     {
@@ -201,132 +204,139 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Camera
-    private void Look()
-    {
-        currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, InputManager.Look, ref currentMouseDeltaVelocity, mouseSmoothTime);
+    //private void Look()
+    //{
+    //    currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, InputManager.Look, ref currentMouseDeltaVelocity, mouseSmoothTime);
 
-        yRotation += currentMouseDelta.x * mouseSensitivity;
-        xRotation -= currentMouseDelta.y * mouseSensitivity;
+    //    yRotation += currentMouseDelta.x * mouseSensitivity;
+    //    xRotation -= currentMouseDelta.y * mouseSensitivity;
 
-        xRotation = Mathf.Clamp(xRotation, -70, 70);
+    //    xRotation = Mathf.Clamp(xRotation, -70, 70);
 
-        transform.rotation = Quaternion.Euler(0, yRotation, 0);
-        Camera.main.transform.localRotation = Quaternion.Euler(xRotation, 0.0f, 0.0f);
+    //    transform.rotation = Quaternion.Euler(0, yRotation, 0);
+    //    Camera.main.transform.localRotation = Quaternion.Euler(xRotation, 0.0f, 0.0f);
 
-    }
-    private void CameraEffects()
-    {
-        CameraBob();
+    //}
+    //private void CameraEffects()
+    //{
+    //    CameraBob();
 
-        CameraShake();
+    //    CameraShake();
 
-        CameraRecoil();
+    //    CameraRecoil();
 
-        Camera.main.transform.localPosition = originalPosition + shakeOffset + new Vector3(0, bobbingOffset, 0);
+    //    Camera.main.transform.localPosition = originalPosition + shakeOffset + new Vector3(0, bobbingOffset, 0);
 
-        CameraFOV();
+    //    CameraFOV();
 
-    }
-    private void CameraBob()
-    {
-        if (isGrounded) return;
+    //}
+    //private void CameraBob()
+    //{
+    //    if (isGrounded) return;
 
-        Transform cameraTransform = Camera.main.transform;
+    //    Transform cameraTransform = Camera.main.transform;
 
-        bool isMoving = Mathf.Abs(HorizontalVelocity) > 0;
+    //    bool isMoving = Mathf.Abs(targetVelocity) > 0;
 
-        if (isMoving)
-        {
-            // Increment the bobbing timer as player is moving
-            timer += Time.deltaTime * bobbingFreq * Mathf.Abs(HorizontalVelocity);
-            // Calculate the new Y position for camera bobbing using a sine wave
-            bobbingOffset = Mathf.Sin(timer) * bobbingAmp;
-        }
-        else
-        {
-            bobbingOffset = Mathf.Lerp(bobbingOffset, 0, Time.deltaTime);
-        }
-        // Add the originalCameraY with the bobbingOffset value as new Y position value
-        //cameraTransform.localPosition = new Vector3(cameraTransform.localPosition.x, originalCamY + bobbingOffset, cameraTransform.localPosition.z);
-    }
-    private void CameraShake()
-    {
-        if (shakeTimeRemaining > 0)
-        {
-            shakeTimeRemaining -= Time.deltaTime;
-        }
-        else
-        {
-            // Ensure we don't accumulate small positional errors over time
-            shakeOffset = Vector3.zero;
-        }
-    }
-    private void CameraFOV()
-    {
-        if (currentXState == STATE.SPRINT)
-        {
-            currentFOV = Mathf.Lerp(currentFOV, sprintFOV, HorizontalVelocity * Time.deltaTime);
-        }
-        else if (currentXState == STATE.SLIDE)
-        {
-            currentFOV = Mathf.Lerp(currentFOV, slideFOV, HorizontalVelocity * Time.deltaTime);
-        }
-        else if (currentXState == STATE.ADS)
-        {
-            currentFOV = Mathf.Lerp(currentFOV, ADSFOV, Time.deltaTime * 10);
-        }
-        else
-        {
-            currentFOV = Mathf.Lerp(currentFOV, normalFOV, HorizontalVelocity * Time.deltaTime);
-        }
+    //    if (isMoving)
+    //    {
+    //        // Increment the bobbing timer as player is moving
+    //        timer += Time.deltaTime * bobbingFreq * Mathf.Abs(targetVelocity);
+    //        // Calculate the new Y position for camera bobbing using a sine wave
+    //        bobbingOffset = Mathf.Sin(timer) * bobbingAmp;
+    //    }
+    //    else
+    //    {
+    //        bobbingOffset = Mathf.Lerp(bobbingOffset, 0, Time.deltaTime);
+    //    }
+    //    // Add the originalCameraY with the bobbingOffset value as new Y position value
+    //    //cameraTransform.localPosition = new Vector3(cameraTransform.localPosition.x, originalCamY + bobbingOffset, cameraTransform.localPosition.z);
+    //}
+    //private void CameraShake()
+    //{
+    //    if (shakeTimeRemaining > 0)
+    //    {
+    //        shakeTimeRemaining -= Time.deltaTime;
+    //    }
+    //    else
+    //    {
+    //        // Ensure we don't accumulate small positional errors over time
+    //        shakeOffset = Vector3.zero;
+    //    }
+    //}
+    //private void CameraFOV()
+    //{
+    //    if (currentXState == STATE.SPRINT)
+    //    {
+    //        currentFOV = Mathf.Lerp(currentFOV, sprintFOV, targetVelocity * Time.deltaTime);
+    //    }
+    //    else if (currentXState == STATE.SLIDE)
+    //    {
+    //        currentFOV = Mathf.Lerp(currentFOV, slideFOV, targetVelocity * Time.deltaTime);
+    //    }
+    //    else if (currentXState == STATE.ADS)
+    //    {
+    //        currentFOV = Mathf.Lerp(currentFOV, ADSFOV, Time.deltaTime * 10);
+    //    }
+    //    else
+    //    {
+    //        currentFOV = Mathf.Lerp(currentFOV, normalFOV, targetVelocity * Time.deltaTime);
+    //    }
 
-            Camera.main.fieldOfView = currentFOV;
-    }
-    private void CameraRecoil()
-    {
-        if (shakeTimeRemaining > 0)
-        {
-            xRotation -= Time.deltaTime;
-        }      
-    }
+    //        Camera.main.fieldOfView = currentFOV;
+    //}
+    //private void CameraRecoil()
+    //{
+    //    if (shakeTimeRemaining > 0)
+    //    {
+    //        xRotation -= Time.deltaTime;
+    //    }      
+    //}
     #endregion
 
     #region Movement
     private void Move()
     {
         moveDirection = InputManager.Movement.x * transform.right + InputManager.Movement.y * transform.forward;
+        var vel = moveDirection * targetVelocity;
 
-        Mathf.Lerp(HorizontalVelocity, 0, maxSpeed);
+        var desired = canMove ? vel : Vector3.zero;
+
+        float rate = (Mathf.Abs(desired.magnitude) > 0.0001f) ? acceleration : Friction;
+        velocity = Vector3.MoveTowards(velocity, desired, rate * Time.deltaTime);
+        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+
         Mathf.Lerp(VerticalVelocity, -maxSpeed, maxSpeed);
 
-        if (HorizontalVelocity < movementSens)
-            HorizontalVelocity = 0;
+        if (targetVelocity < movementSens)
+            targetVelocity = 0;
 
-        Vector3 hMove = moveDirection * HorizontalVelocity;
+        Vector3 hMove = moveDirection * targetVelocity;
         Vector3 vMove = transform.up * VerticalVelocity;
        
-        Vector3 Move = hMove + vMove;
-        rb.AddForce(Move);
+        Vector3 Move = velocity;
+        characterController.Move(Move * Time.deltaTime);
+        //rb.AddForce(Move);
     }
     private void Walk()
     {
-        HorizontalVelocity += speed;
+        targetVelocity = speed;
     }
     private void Sprint()
     {
-        HorizontalVelocity += speed * sprintSpeedMul;
+        targetVelocity += speed * sprintSpeedMul;
     }
     private void Crouch()
     {
-        HorizontalVelocity += speed * crouchSpeedMul;
+        targetVelocity += speed * crouchSpeedMul;
     }
     private void ADS()
     {
-        HorizontalVelocity += speed * 0.25f;
+        targetVelocity += speed * 0.25f;
     }
     private void Slide()
     {
-        HorizontalVelocity = InitialSlideVelocity;
+        targetVelocity = InitialSlideVelocity;
         sliding = true;
     }
     private void Jump()
@@ -368,16 +378,18 @@ public class PlayerController : MonoBehaviour
         Ray groundRay = new Ray(transform.position, -transform.up);
         isGrounded = Physics.Raycast(groundRay, out RaycastHit groundHit, groundRayLength, groundLayer);
 
-        //friction
-        if (currentXState == STATE.SLIDE)
-        {
-            HorizontalVelocity = Mathf.Lerp(HorizontalVelocity, 0, Time.deltaTime);
-        }
-        else
-        {
-            HorizontalVelocity -= Friction * HorizontalVelocity * 0.1f;
+        //add external features here, eg. stunned rooted;
+        canMove = true;
 
-        }
+        //if (currentXState == STATE.SLIDE)
+        //{
+        //    HorizontalVelocity = Mathf.Lerp(HorizontalVelocity, 0, Time.deltaTime);
+        //}
+        //else
+        //{
+        //    HorizontalVelocity -= Friction * HorizontalVelocity * 0.1f;
+
+        //}
 
         //gravity 
         if (currentYState == STATE.FALL || currentYState == STATE.INAIR || currentYState == STATE.LAUNCH)
@@ -549,7 +561,7 @@ public class PlayerController : MonoBehaviour
                     sliding = false;
                     break;
                 }
-                if (HorizontalVelocity < 10 && !InputManager.CrouchIsHeld)
+                if (velocity.x < 10 && !InputManager.CrouchIsHeld)
                 {
                     if (Mathf.Abs(InputManager.Movement.magnitude) < movementSens)
                     {
