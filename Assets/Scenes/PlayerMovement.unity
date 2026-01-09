@@ -391,7 +391,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -411,12 +411,12 @@ MonoBehaviour:
   sliding: 0
   mouseSmoothTime: 0.03
   mouseSensitivity: 1
-  Gravity: 9.8
+  Gravity: 13
   Friction: 1
   movementSens: 0.1
-  speed: 10
-  InitialJumpVelocity: 20
-  InitialSlideVelocity: 20
+  speed: 1
+  InitialJumpVelocity: 8
+  InitialSlideVelocity: 30
   MaxJump: 1
   HorizontalVelocity: 0
   VerticalVelocity: 0
@@ -425,15 +425,15 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  groundRayLength: 0
-  bobbingOffset: 0
+  groundRayLength: 1.1
+  bobbingOffset: 0.1
   bobbingFreq: 0
   bobbingAmp: 0
   camRotationX: 0
   camDeltaRotationX: 0
   sprintFOVMultiplier: 1.5
   slideFOVMultiplier: 2
-  shakeDuration: 0.5
+  shakeDuration: 0.01
   shakeMagnitude: 0.2
   shakeTimeRemaining: 0
   pickUpRange: 0
