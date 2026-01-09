@@ -6,16 +6,18 @@ using UnityEngine.Rendering;
 public class PlayerData : ScriptableObject
 {
     [Header("Health")]
-    [SerializeField] private float _health;
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _res;
 
     [Header("Movement")]
     [SerializeField] private float _maxSpeed;
     [SerializeField] private float _speed;
+
     [SerializeField] private float _sprintMul;
     [SerializeField] private float _crouchMul;
-    [SerializeField] private float _jumpHeight;
+
+    [SerializeField] private float _jumpVelocity;
+    [SerializeField] private float _slideVelocity;
 
     [Header("Height")]
     [SerializeField] private float _standingHeight;
@@ -35,18 +37,13 @@ public class PlayerData : ScriptableObject
 
     private void OnEnable()
     {
-        _health = _maxHealth;
-
         _level = 0;
         _currentXp = 0;
         calculateRequiredXp();
 
     }
     //health
-    public float getHealth()
-    {
-        return _health;
-    }
+  
     public float getMaxHealth()
     {
         return _maxHealth;
@@ -55,19 +52,7 @@ public class PlayerData : ScriptableObject
     {
         return _res;
     }
-    public void takeDmg(float dmg)
-    {
-        _health -= dmg;
-        statChange.Invoke();
-    }
-    public void restoreHealth(float heal)
-    {
-        _health += heal;
-        _health = Mathf.Clamp(_health, 0, _maxHealth);
-
-        statChange.Invoke();
-    }
-
+ 
     //Movement
     public float getMaxSpeed()
     {
@@ -85,9 +70,13 @@ public class PlayerData : ScriptableObject
     {
         return _crouchMul;
     }
-    public float getJumpHeight()
+    public float getJumpVelocity()
     {
-        return _jumpHeight;
+        return _jumpVelocity;
+    }
+    public float getSlideVelocity()
+    {
+        return _slideVelocity;
     }
     public float getStandingHeight()
     {
@@ -127,7 +116,6 @@ public class PlayerData : ScriptableObject
         _level++;
         _currentXp = Mathf.RoundToInt(_currentXp - _requiredXp);
         increaseHealth(1);
-        restoreHealth(5);
         increaseDmg(2);
         calculateRequiredXp();
         levelChange.Invoke();

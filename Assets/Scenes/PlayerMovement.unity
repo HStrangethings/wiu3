@@ -408,15 +408,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227bb10827c00fa4a9bc21b16c2ecbd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 32e813893b0bd5141a685aab1e583357, type: 2}
   sliding: 0
   mouseSmoothTime: 0.03
   mouseSensitivity: 1
   Gravity: 13
   Friction: 2
   movementSens: 0.1
-  speed: 1
-  InitialJumpVelocity: 8
-  InitialSlideVelocity: 30
   MaxJump: 1
   HorizontalVelocity: 0
   VerticalVelocity: 0

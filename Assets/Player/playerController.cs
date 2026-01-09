@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody rb;
+    private Rigidbody rb;
+    public PlayerData playerData;
 
     #region FSM
     //Simple FSM
@@ -43,10 +44,14 @@ public class PlayerController : MonoBehaviour
     public float Friction = 1.0f;
     public float movementSens = 0.1f;
 
-    public float speed = 10;
+    private float speed;
+    private float maxSpeed;
 
-    public float InitialJumpVelocity = 20;
-    public float InitialSlideVelocity = 20;
+    private float sprintSpeedMul;
+    private float crouchSpeedMul;
+
+    private float InitialJumpVelocity;
+    private float InitialSlideVelocity;
 
     public float MaxJump = 1;
     private float _jumpCount;
@@ -109,7 +114,6 @@ public class PlayerController : MonoBehaviour
     //UI
     [SerializeField] TextMeshProUGUI stateText;
     [SerializeField] TextMeshProUGUI VelocityText;
-
     #endregion
 
     private void Start()
@@ -137,6 +141,14 @@ public class PlayerController : MonoBehaviour
         sprintFOV = normalFOV * sprintFOVMultiplier;
         slideFOV = normalFOV * slideFOVMultiplier;
         ADSFOV = normalFOV * 0.5f;
+
+        // Initialize movement variables that depend on playerData
+        speed = playerData.getSpeed();
+        maxSpeed = playerData.getMaxSpeed();
+        sprintSpeedMul = playerData.getSprintMul();
+        crouchSpeedMul = playerData.getCrouchMul();
+        InitialJumpVelocity = playerData.getJumpVelocity();
+        InitialSlideVelocity = playerData.getSlideVelocity();
     }
 
     #region Updates
@@ -284,8 +296,8 @@ public class PlayerController : MonoBehaviour
     {
         moveDirection = InputManager.Movement.x * transform.right + InputManager.Movement.y * transform.forward;
 
-        Mathf.Lerp(HorizontalVelocity, 0, 10);
-        Mathf.Lerp(VerticalVelocity, -10, 10);
+        Mathf.Lerp(HorizontalVelocity, 0, maxSpeed);
+        Mathf.Lerp(VerticalVelocity, -maxSpeed, maxSpeed);
 
         if (HorizontalVelocity < movementSens)
             HorizontalVelocity = 0;
@@ -302,11 +314,11 @@ public class PlayerController : MonoBehaviour
     }
     private void Sprint()
     {
-        HorizontalVelocity += speed * 1.5f;
+        HorizontalVelocity += speed * sprintSpeedMul;
     }
     private void Crouch()
     {
-        HorizontalVelocity += speed * 0.5f;
+        HorizontalVelocity += speed * crouchSpeedMul;
     }
     private void ADS()
     {
