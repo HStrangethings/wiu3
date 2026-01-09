@@ -355,14 +355,16 @@ public class PlayerController : MonoBehaviour
         //grounded check 
         Ray groundRay = new Ray(transform.position, -transform.up);
         isGrounded = Physics.Raycast(groundRay, out RaycastHit groundHit, groundRayLength, groundLayer);
+
         //friction
-        if(currentXState == STATE.SLIDE)
+        if (currentXState == STATE.SLIDE)
         {
             HorizontalVelocity = Mathf.Lerp(HorizontalVelocity, 0, Time.deltaTime);
         }
         else
         {
             HorizontalVelocity -= Friction * HorizontalVelocity * 0.1f;
+
         }
 
         //gravity 

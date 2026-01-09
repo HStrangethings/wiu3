@@ -412,7 +412,7 @@ MonoBehaviour:
   mouseSmoothTime: 0.03
   mouseSensitivity: 1
   Gravity: 13
-  Friction: 1
+  Friction: 2
   movementSens: 0.1
   speed: 1
   InitialJumpVelocity: 8
