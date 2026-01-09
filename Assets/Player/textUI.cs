@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class textUI : MonoBehaviour
 {
-     public playerController playerController;
+    public PlayerController playerController;
     TextMeshProUGUI stateUI;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,8 +14,6 @@ public class textUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        stateUI.text = playerController.currentState.ToString() +
-            "\n onGround: " + playerController.onGround.ToString() +
-            "\n vel: " + playerController.vel.ToString("F1");
+      
     }
 }
