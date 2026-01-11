@@ -90,10 +90,9 @@ public class BoatShield : BossMove
                 break;
             case "comboCheck":
                 boss.BossMoveComboDetails(GetType(), out bool hit, out bool LOS, out float dist);
-                Debug.Log(hit);
 
-                bool close = dist < 15f;
-                bool far = dist > 15f;
+                bool close = dist < 11f;
+                bool far = dist > 11f;
                 string nextMoveId = "null";
 
                 if (!LOS) { nextMoveId = boss.mm.Choose("wideWaterBlast", "null"); }

@@ -4,6 +4,9 @@ public class PlayerWeaponController : MonoBehaviour
 {
     public WeaponPreset currentPreset;
     public HitboxManager hitboxManager;
+    public bool isAttacking = false;
+    private bool canAttack = true;
+    private PlayerController controller;
 
     [Header("Animator")]
     public Animator animator;
@@ -22,14 +25,19 @@ public class PlayerWeaponController : MonoBehaviour
     void Awake()
     {
         if (!animator) animator = GetComponentInChildren<Animator>();
+        controller = GetComponentInParent<PlayerController>();
     }
 
     void Update()
     {
         if (!currentPreset || currentPreset.abilities == null) return;
-
-        //?
+        
         if (lockoutDuringAbility && Time.time < busyUntil) return;
+
+        if (controller.GetCanMove() == false)
+        {
+            controller.ToggleCanMove(true);
+        }
 
         for (int i = 0; i < currentPreset.abilities.Length; i++)
         {
@@ -46,6 +54,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     void UseAbility(int index)
     {
+        if (!canAttack) return;
         if (!currentPreset) return;
         if (index < 0 || index >= currentPreset.abilities.Length) return;
 
@@ -82,16 +91,33 @@ public class PlayerWeaponController : MonoBehaviour
         }
 
         AbilityFunction();
+        isAttacking = true;
 
-
-        // Optional lockout using your duration override or clip length
         if (lockoutDuringAbility)
         {
             float dur = a.GetDuration(); // uses override if enabled, else clip length
             busyUntil = Time.time + Mathf.Max(0f, dur);
+            controller.ToggleCanMove(false);
         }
     }
 
+    //call this in animations, and also when stunned or whenever attack animation gets cut
+    public void StopAttacking()
+    {
+        isAttacking = false;
+    }
+
+    public void StunnedAttack()
+    {
+        isAttacking = false;
+        canAttack = false;
+        busyUntil = 0;
+    }
+
+    public void RecoverAttack()
+    {
+        canAttack = true;
+    }
 
     //wtv monobehaviour function u might need per ability, eg.spawning projectile
     public void AbilityFunction()

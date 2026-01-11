@@ -9,8 +9,7 @@ public class BossMoveMachine : MonoBehaviour
     //uses string because each move can have different values, parameters
     private Dictionary<string, BossMove> moves = new Dictionary<string, BossMove>();
     public BossMove currentMove;
-
-    private Queue<string> queuedMoves = new Queue<string>();
+    public Queue<string> queuedMoves = new Queue<string>();
     private bool startNextFrame;
 
     private int comboCounter = 0;
@@ -52,6 +51,7 @@ public class BossMoveMachine : MonoBehaviour
             // queue the start for next frame
             startNextFrame = true;
         }
+
     }
 
     public void PlayMove(string id)

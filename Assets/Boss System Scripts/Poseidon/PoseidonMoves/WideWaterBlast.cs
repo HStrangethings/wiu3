@@ -63,7 +63,6 @@ public class WideWaterBlast : BossMove
                 var projRb = p.GetComponent<Rigidbody>();
                 projRb.AddForce(projRb.transform.forward * projSpeed, ForceMode.Impulse);
             }
-            isFinished = true;
         }
 
         if (!comboChecked && timer >= 3f + 0.2f && boss.mm.HitConfirmed(GetType()))
@@ -146,13 +145,14 @@ public class WideWaterBlast : BossMove
                 break;
             case "comboCheck":
                 boss.BossMoveComboDetails(GetType(), out bool hit, out bool LOS, out float dist);
-                Debug.Log(hit);
 
-                bool close = dist < 15f;
-                bool far = dist > 15f;
+                bool close = dist < 11f;
+                bool far = dist > 11f;
                 string nextMoveId = "null";
 
-                if (hit && !LOS) { nextMoveId = boss.mm.Choose("waterWave", "null", "null"); }
+                bool closeAttacking = boss.IsPlayerAttacking();
+                if (closeAttacking && LOS) { nextMoveId = boss.mm.Choose("quickPosMelee", "null"); }
+                else if (hit && !LOS) { nextMoveId = boss.mm.Choose("waterWave", "null", "null"); }
                 else if (hit && close) { nextMoveId = boss.mm.Choose("posMelee", "null", "posMelee"); }
                 else if (hit && far) { nextMoveId = boss.mm.Choose("waterBlast", "boatShield","boatShield", "null"); }
                 else if (!hit && LOS && far) { nextMoveId = boss.mm.Choose("boatShield", "waterBlast", "waterWave", "null"); }

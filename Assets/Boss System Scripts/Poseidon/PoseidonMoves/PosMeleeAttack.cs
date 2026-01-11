@@ -4,13 +4,16 @@ using UnityEngine;
 public class PosMeleeAttack : BossMove
 {
     private PoseidonBoss boss;
-    public PosMeleeAttack(PoseidonBoss boss) : base(boss)
+    private float animSpeed;
+    public PosMeleeAttack(PoseidonBoss boss, float animSpeed) : base(boss)
     {
         this.boss = boss;
+        this.animSpeed = animSpeed;
     }
     public override void Start()
     {
         Debug.Log("Starting PosMeleeAttack");
+        boss.animator.speed = animSpeed;
         boss.animator.Play("ArmAttack");
     }
     public override void Execute()
@@ -23,6 +26,7 @@ public class PosMeleeAttack : BossMove
     {
         Debug.Log("Ending PosMeleeAttack");
         boss.hitboxManager.SetGroup(boss.Harms, false);
+        boss.animator.speed = 1;
         boss.animator.Play("New State");
         base.End();
     }
@@ -40,13 +44,14 @@ public class PosMeleeAttack : BossMove
                 break;
             case "comboCheck":
                 boss.BossMoveComboDetails(GetType(), out bool hit, out bool LOS, out float dist);
-                Debug.Log(hit);
 
-                bool close = dist < 15f;
-                bool far = dist > 15f;
+                bool close = dist < 11f;
+                bool far = dist > 11f;
                 string nextMoveId = "null";
 
-                if (hit && !LOS) { nextMoveId = boss.mm.Choose("waterWave", "null","waterWave"); }
+                bool closeAttacking = boss.IsPlayerAttacking();
+                if (closeAttacking && LOS) { nextMoveId = boss.mm.Choose("quickPosMelee", "null"); }
+                else if (hit && !LOS) { nextMoveId = boss.mm.Choose("waterWave", "null","waterWave"); }
                 else if (hit && close) { nextMoveId = boss.mm.Choose("posMelee", "null", "posMelee"); }
                 else if (hit && far) { nextMoveId = boss.mm.Choose("waterBlast", "boatShield", "boatShield", "null"); }
                 else if (!hit && LOS && far) { nextMoveId = boss.mm.Choose("boatShield", "waterBlast", "waterWave", "null"); }
@@ -64,7 +69,7 @@ public class PosMeleeAttack : BossMove
 
     public override BossMove Clone()
     {
-        return new PosMeleeAttack(this.boss);
+        return new PosMeleeAttack(this.boss,this.animSpeed);
     }
 
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Text;
+using TMPro;
 using UnityEngine;
 
 public class BossBehaviour : MonoBehaviour
@@ -12,6 +14,7 @@ public class BossBehaviour : MonoBehaviour
     //keep track of player
     [HideInInspector]
     public GameObject player;
+    private PlayerWeaponController playerWeapon;
 
     //own components
     [HideInInspector]
@@ -23,11 +26,14 @@ public class BossBehaviour : MonoBehaviour
 
     [SerializeField] LayerMask losBlockMask; // set this to "Environment/Walls" layers
 
+    public TextMeshProUGUI DebugText;
+
     public virtual void Start()
     {
         sm = GetComponent<BossStateMachine>();
         mm = GetComponent<BossMoveMachine>();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerWeapon = player.GetComponentInChildren<PlayerWeaponController>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         hitboxManager = GetComponent<HitboxManager>();
@@ -110,6 +116,46 @@ public class BossBehaviour : MonoBehaviour
         sm.ComboFin();
     }
 
+    public bool IsPlayerAttacking()
+    {
+        if (playerWeapon.isAttacking == true)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void CurrentBossDebug()
+    {
+        //print out current states. they dont have names, just print out class name
+        //then print out current queue of moves
+        //assign this string to a TextMeshProUGUI.text
+
+        var sb = new StringBuilder(512);
+        sb.AppendLine("States:");
+        sb.AppendLine($"  {sm.currentState.GetType().Name}");
+        if (mm.currentMove != null)
+        {
+            sb.AppendLine($"Current Move ({mm.currentMove.GetType().Name}");
+        }
+        else { sb.AppendLine($"Current Move (null)"); }
+            sb.AppendLine($"Queued Moves ({mm.queuedMoves.Count})");
+        if (mm.queuedMoves.Count == 0){
+            sb.AppendLine("  (empty)");
+        }
+        else
+        {
+            int i = 0;
+            foreach (var move in mm.queuedMoves) // does NOT dequeue
+            {
+                sb.AppendLine($"  {i}: {move}");
+                i++;
+            }
+        }
+
+        DebugText.text = sb.ToString();
+    }
+
     private void OnDrawGizmos()
     {
         // Set color
@@ -117,5 +163,18 @@ public class BossBehaviour : MonoBehaviour
 
         // Draw sphere around the boss
         Gizmos.DrawWireSphere(transform.position, boss.bossRad);
+
+        if (player == null) return;
+
+        Vector3 origin = transform.position;
+        Vector3 target = player.transform.position;
+
+        bool canSee = HasLOS();
+
+        Gizmos.color = canSee ? Color.green : Color.red;
+        Gizmos.DrawLine(origin, target);
+
+        // Optional: draw a small marker at player position
+        Gizmos.DrawWireSphere(target, 0.2f);
     }
 }

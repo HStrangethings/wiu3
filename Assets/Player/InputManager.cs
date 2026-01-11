@@ -19,12 +19,16 @@ public class InputManager : MonoBehaviour
     public static bool ADSIsHeld;
     public static bool ADSWasReleased;
 
+    public static bool camLockOn;
+
     private InputAction _moveAction;
     private InputAction _lookAction;
 
     private InputAction _jumpAction;
     private InputAction _sprintAction;
     private InputAction _adsAction;
+
+    private InputAction _lockOnAction;
 
     private void Awake()
     {
@@ -36,7 +40,7 @@ public class InputManager : MonoBehaviour
         _jumpAction = PlayerInput.actions["Jump"];
         _sprintAction = PlayerInput.actions["Sprint"];
 
-
+        _lockOnAction = PlayerInput.actions["LockOn"];
     }
 
     void Update()
@@ -51,5 +55,7 @@ public class InputManager : MonoBehaviour
         JumpWasReleased = _jumpAction.WasReleasedThisFrame();
 
         SprintIsHeld = _sprintAction.IsPressed();
+
+        if (_lockOnAction.WasPressedThisFrame()) { camLockOn = !camLockOn; }
     }
 }

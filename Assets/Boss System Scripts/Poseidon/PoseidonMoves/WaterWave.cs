@@ -85,13 +85,14 @@ public class WaterWave : BossMove
                 break;
             case "comboCheck":
                 boss.BossMoveComboDetails(GetType(), out bool hit, out bool LOS, out float dist);
-                Debug.Log(hit);
 
-                bool close = dist < 15f;
-                bool far = dist > 15f;
+                bool close = dist < 11f;
+                bool far = dist > 11f;
                 string nextMoveId = "null";
 
-                if (hit && !LOS) { nextMoveId = boss.mm.Choose("wideWaterBlast", "null"); }
+                bool closeAttacking = boss.IsPlayerAttacking();
+                if (closeAttacking && LOS) { nextMoveId = boss.mm.Choose("quickPosMelee", "null"); }
+                else if (hit && !LOS) { nextMoveId = boss.mm.Choose("wideWaterBlast", "null"); }
                 else if (hit && close) { nextMoveId = boss.mm.Choose("posMelee", "wideWaterBlast", "posMelee"); }
                 else if (hit && far) { nextMoveId = boss.mm.Choose("waterBlast", "boatShield", "null"); }
                 else if (!hit && LOS) { nextMoveId = boss.mm.Choose("wideWaterBlast", "waterWave"); }

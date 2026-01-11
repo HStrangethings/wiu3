@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,13 +20,13 @@ public class PlayerController : MonoBehaviour
         WALK,
         SPRINT,
         CROUCH,
-        SLIDE,
         ADS,
         INAIR,
         FALL,
         LAUNCH,
         GLIDE,
-        GROUNDED
+        GROUNDED,
+        STUNNED,
     }
 
     private STATE currentXState;
@@ -33,13 +34,6 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Movement Variables
-    public bool sliding;
-
-    private Vector2 currentMouseDelta;
-    private Vector2 currentMouseDeltaVelocity;
-    public float mouseSmoothTime = 0.03f; // smoothing duration in seconds
-    public float mouseSensitivity = 1.0f;
-
     //overall stuff
     public float Gravity = 9.8f;
     public float Friction = 1.0f;
@@ -59,9 +53,6 @@ public class PlayerController : MonoBehaviour
     public float MaxJump = 1;
     private float _jumpCount;
 
-    private float xRotation = 0.0f;
-    private float yRotation = 0.0f;
-
     //movement
     public float targetVelocity;
     public float VerticalVelocity;
@@ -70,25 +61,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer;
     public float groundRayLength;
 
-    //camera 
-    private float originalCamY;
-    private float timer;
-    public float bobbingOffset;
-    public float bobbingFreq;
-    public float bobbingAmp;
-
-    //Recoil
-    public float camRotationX = 0f;
-    public float camDeltaRotationX = 0f;
-
-    // Use for change FOV
-    public float sprintFOVMultiplier = 1.5f; // multiplier for sprinting
-    public float slideFOVMultiplier = 2f; // multiplier for sliding
-    private float sprintFOV; // stores FOV value when sprinting
-    private float slideFOV; // stores FOV value when sliding
-    private float normalFOV; // stores FOV value when walking
-    private float ADSFOV;
-    private float currentFOV; // stores current FOV
+    public float rotationSpeed;
 
     #endregion
 
@@ -129,22 +102,6 @@ public class PlayerController : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
 
-        //for camera bobbing
-        originalCamY = Camera.main.transform.localPosition.y;
-        timer = 0f;
-        bobbingOffset = 0f;
-        camRotationX = Camera.main.transform.localEulerAngles.x;
-        camDeltaRotationX = 0;
-
-        // for camera shake
-        originalPosition = Camera.main.transform.localPosition;
-
-        // for change of FOV
-        currentFOV = normalFOV = Camera.main.fieldOfView;
-        sprintFOV = normalFOV * sprintFOVMultiplier;
-        slideFOV = normalFOV * slideFOVMultiplier;
-        ADSFOV = normalFOV * 0.5f;
-
         // Initialize movement variables that depend on playerData
         speed = playerData.getSpeed();
         maxSpeed = playerData.getMaxSpeed();
@@ -183,6 +140,9 @@ public class PlayerController : MonoBehaviour
         if (currentXState == STATE.WALK)
             Walk();
 
+        if (currentXState == STATE.STUNNED)
+            Stunned();
+
         if (currentXState == STATE.SPRINT)
             Sprint();
 
@@ -194,9 +154,6 @@ public class PlayerController : MonoBehaviour
 
         if ((InputManager.JumpWasPressed ||InputManager.JumpIsHeld)&& currentYState == STATE.GROUNDED)
             Jump();
-
-        if (currentXState == STATE.SLIDE && !sliding)
-            Slide();
 
         ExternalForces();
         Move();
@@ -297,7 +254,10 @@ public class PlayerController : MonoBehaviour
     #region Movement
     private void Move()
     {
-        moveDirection = InputManager.Movement.x * transform.right + InputManager.Movement.y * transform.forward;
+        Vector3 camForward = Camera.main.transform.forward; camForward.y = 0f; camForward.Normalize();
+        Vector3 camRight = Camera.main.transform.right; camRight.y = 0f; camRight.Normalize();
+
+        moveDirection = InputManager.Movement.x * camRight + InputManager.Movement.y * camForward;
         var vel = moveDirection * targetVelocity;
 
         var desired = canMove ? vel : Vector3.zero;
@@ -314,6 +274,9 @@ public class PlayerController : MonoBehaviour
         Vector3 hMove = moveDirection * targetVelocity;
         Vector3 vMove = transform.up * VerticalVelocity;
        
+        if (canMove)
+            RotateCharacter(moveDirection);
+
         Vector3 Move = velocity;
         characterController.Move(Move * Time.deltaTime);
         //rb.AddForce(Move);
@@ -321,6 +284,10 @@ public class PlayerController : MonoBehaviour
     private void Walk()
     {
         targetVelocity = speed;
+    }
+    private void Stunned()
+    {
+        targetVelocity = 0;
     }
     private void Sprint()
     {
@@ -334,42 +301,20 @@ public class PlayerController : MonoBehaviour
     {
         targetVelocity += speed * 0.25f;
     }
-    private void Slide()
-    {
-        targetVelocity = InitialSlideVelocity;
-        sliding = true;
-    }
     private void Jump()
     {
         VerticalVelocity = InitialJumpVelocity;
         currentYState = STATE.INAIR;
     }
-    #endregion
 
-    #region Combat
-    private void InteractCheck()
+    private void RotateCharacter(Vector3 moveDir)
     {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-        if (Physics.Raycast(ray, out RaycastHit hit, pickUpRange, itemLayer))
+        if (InputManager.Movement.magnitude > 0.001f)
         {
-           
+            Quaternion targetRot = Quaternion.LookRotation(moveDir, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
         }
     }
-   
-    //delte this section if not needed
-    //private void PickUp(Item item, RaycastHit hit)
-    //{
-
-    //}
-    //private void Interact(Item item, RaycastHit hit)
-    //{
-
-    //}
-    //private void Drop()
-    //{
-      
-    //}
-
     #endregion
 
     private void ExternalForces()
@@ -379,7 +324,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics.Raycast(groundRay, out RaycastHit groundHit, groundRayLength, groundLayer);
 
         //add external features here, eg. stunned rooted;
-        canMove = true;
+        //canMove = true;
 
         //if (currentXState == STATE.SLIDE)
         //{
@@ -524,11 +469,6 @@ public class PlayerController : MonoBehaviour
                     currentXState = STATE.ADS;
                     break;
                 }
-
-                if (InputManager.CrouchIsHeld)
-                {
-                    currentXState = STATE.SLIDE;
-                }
                 break;
 
             case STATE.CROUCH:
@@ -550,31 +490,6 @@ public class PlayerController : MonoBehaviour
                 {
                     currentXState = STATE.ADS;
                     break;
-                }
-                break;
-
-            case STATE.SLIDE:
-
-                if(currentYState == STATE.LAUNCH)
-                {
-                    currentXState = STATE.IDLE;
-                    sliding = false;
-                    break;
-                }
-                if (velocity.x < 10 && !InputManager.CrouchIsHeld)
-                {
-                    if (Mathf.Abs(InputManager.Movement.magnitude) < movementSens)
-                    {
-                        currentXState = STATE.IDLE;
-                        sliding = false;
-                        break;
-                    }
-                    else
-                    {
-                        currentXState = STATE.WALK;
-                        sliding = false;
-                        break;
-                    }
                 }
                 break;
 
@@ -600,4 +515,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void GetStunned()
+    {
+        currentXState = STATE.STUNNED;
+    }
+
+    public void RecoverStunned()
+    {
+        currentXState = STATE.IDLE;
+    }
+
+    public void ToggleCanMove(bool canMove)
+    {
+        this.canMove = canMove;
+    }
+
+    public bool GetCanMove()
+        { return canMove; }
 }
