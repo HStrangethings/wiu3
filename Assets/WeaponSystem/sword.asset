@@ -17,26 +17,31 @@ MonoBehaviour:
   description: 
   icon: {fileID: 0}
   idle:
+    animatorStateName: 
     clip: {fileID: -203655887218126122, guid: 1551ea9027fc1764c8080e7b30d6a1d4, type: 3}
     useOverrideDuration: 0
     overrideDuration: 0
-  equip:
-    clip: {fileID: 0}
+  attackSlot:
+  - animatorStateName: Hit1
+    clip: {fileID: 7400000, guid: 45b8fba7dfe2a6e4dbe5054de18e4e01, type: 2}
     useOverrideDuration: 0
     overrideDuration: 0
-  unequip:
-    clip: {fileID: 0}
+  - animatorStateName: Hit2
+    clip: {fileID: 7400000, guid: fa027f784ca78434e8e43e0fb4a26d25, type: 2}
+    useOverrideDuration: 0
+    overrideDuration: 0
+  - animatorStateName: Hit3
+    clip: {fileID: 7400000, guid: aa2588a67581eba46906621ce01b7e37, type: 2}
     useOverrideDuration: 0
     overrideDuration: 0
   abilities:
   - name: attack
+    stateName: test
     clip: {fileID: 7400000, guid: 0e1e6bcdf63438845934ad50a6ff8eb8, type: 2}
     activationKey: 101
-    mode: 0
     element: 0
     baseDamage: 20
     critChance: 0.18
     statusEffects: []
-    projectilePrefab: {fileID: 0}
     useOverrideDuration: 0
     overrideDuration: 0

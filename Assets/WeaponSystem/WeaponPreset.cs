@@ -18,6 +18,7 @@ public struct StatusEffectSpec
 [System.Serializable]
 public struct AnimSlot
 {
+    public string animatorStateName;
     public AnimationClip clip;
 
     [Header("Optional Runtime Override")]
@@ -33,6 +34,7 @@ public struct AbilityEntry
 {
     [Header("Identity & Trigger")]
     public string name;                  // e.g., "Whirlwind" / "Magic Bolt"
+    public string stateName;
     public AnimationClip clip;           // animation for the ability
     public KeyCode activationKey;        // e.g., Q/E/Mouse1
 
@@ -63,14 +65,20 @@ public class WeaponPreset : ScriptableObject
 
     [Header("General Animations")]
     public AnimSlot idle;
-    public AnimSlot equip;
-    public AnimSlot unequip;
+    public AnimSlot[] attackSlot;
 
     [Header("Abilities")]
     public AbilityEntry[] abilities;
 
     // Convenience helpers
     public float GetIdleDuration() => idle.GetDuration();
-    public float GetEquipDuration() => equip.GetDuration();
-    public float GetUnequipDuration() => unequip.GetDuration();
+}
+
+public enum ComboType { ability, attack }
+
+public struct ComboAction
+{
+    public ComboType type;
+    public AnimSlot attackSlot;
+    public AbilityEntry abilityEntry;
 }

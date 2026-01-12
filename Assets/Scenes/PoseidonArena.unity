@@ -2208,7 +2208,7 @@ MonoBehaviour:
   hitboxManager: {fileID: 996127768}
   isAttacking: 0
   animator: {fileID: 996127770}
-  crossFadeTime: 0.05
+  crossFadeTime: 0.25
   projectileSpawnPoint: {fileID: 0}
   lockoutDuringAbility: 1
 --- !u!1 &1170404675
