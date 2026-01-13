@@ -73,7 +73,7 @@ public class PlayerDamageable : Damageable
     public void RecoverStunned()
     {
         weaponController.RecoverAttack();
-        playerController.RecoverStunned();
+        playerController.ToIdleState();
         animator.Play("Sword And Shield Idle 1");
     }
 

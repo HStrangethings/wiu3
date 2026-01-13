@@ -6,26 +6,34 @@ public class PlayerCamController : MonoBehaviour
 {
     public CinemachineCamera freeLookCam;
     public CinemachineCamera lockOnCam;
+    public Transform target;
 
     bool lastLock; // remembers previous state
+    public bool isLocked = false;
 
     void Start()
     {
-        lastLock = InputManager.camLockOn; // or however you access it
-        Apply(lastLock);
+        InputManager.camToggle += Apply;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.camToggle -= Apply;
     }
 
     void Update()
     {
-        bool now = InputManager.camLockOn;
-        if (now == lastLock) return;
-
-        lastLock = now;
-        Apply(now);
     }
 
     void Apply(bool locked)
     {
+        if (target == null) {
+            isLocked = false;
+            freeLookCam.gameObject.SetActive(true);
+            lockOnCam.gameObject.SetActive(false);
+            return;
+        }
+        isLocked = locked;
         freeLookCam.gameObject.SetActive(!locked);
         lockOnCam.gameObject.SetActive(locked);
     }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +21,7 @@ public class InputManager : MonoBehaviour
     public static bool ADSWasReleased;
 
     public static bool camLockOn;
+    public static event Action<bool> camToggle;
 
     private InputAction _moveAction;
     private InputAction _lookAction;
@@ -56,6 +58,9 @@ public class InputManager : MonoBehaviour
 
         SprintIsHeld = _sprintAction.IsPressed();
 
-        if (_lockOnAction.WasPressedThisFrame()) { camLockOn = !camLockOn; }
+        if (_lockOnAction.WasPressedThisFrame()) { 
+            camLockOn = !camLockOn;
+            camToggle?.Invoke(camLockOn);
+        }
     }
 }

@@ -146,7 +146,8 @@ public class PlayerWeaponController : MonoBehaviour
             {
                 float dur = GetDuration(first);
                 busyUntil = Time.time + Mathf.Max(0f, dur);
-                if (controller) controller.ToggleCanMove(false);
+                controller.ToggleCanMove(false);
+                controller.DoAttack();
             }
         }
 
@@ -191,19 +192,26 @@ public class PlayerWeaponController : MonoBehaviour
             {
                 float dur = GetDuration(nextAction);
                 busyUntil = Time.time + Mathf.Max(0f, dur);
-                if (controller) controller.ToggleCanMove(false);
+                controller.ToggleCanMove(false);
+                controller.DoAttack();
             }
 
             yield return null;
         }
 
         // ---- Combo finished: reset ----
-        combo.Clear();
-        playIndex = 0;
-        comboPlaying = false;
+        ResetCombo();
 
         // Optional: re-enable movement at the end (if you want)
         if (controller) controller.ToggleCanMove(true);
+        controller.ToIdleState();
+    }
+
+    public void ResetCombo()
+    {
+        combo.Clear();
+        playIndex = 0;
+        comboPlaying = false;
     }
 
     bool IsCurrentAnimationReadyForNextStep()
@@ -302,6 +310,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     public void StunnedAttack()
     {
+        ResetCombo();
         isAttacking = false;
         canAttack = false;
         busyUntil = 0;

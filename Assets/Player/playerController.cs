@@ -3,6 +3,7 @@ using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 
 public class PlayerController : MonoBehaviour
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     public PlayerData playerData;
     public Vector3 velocity;
+    private Animator animator;
+    private PlayerCamController camController;
 
     #region FSM
     //Simple FSM
@@ -20,13 +23,11 @@ public class PlayerController : MonoBehaviour
         WALK,
         SPRINT,
         CROUCH,
-        ADS,
         INAIR,
         FALL,
-        LAUNCH,
-        GLIDE,
         GROUNDED,
         STUNNED,
+        ATTACK
     }
 
     private STATE currentXState;
@@ -109,6 +110,15 @@ public class PlayerController : MonoBehaviour
         crouchSpeedMul = playerData.getCrouchMul();
         InitialJumpVelocity = playerData.getJumpVelocity();
         InitialSlideVelocity = playerData.getSlideVelocity();
+
+        animator = GetComponentInChildren<Animator>();
+        camController = GetComponent<PlayerCamController>();
+        InputManager.camToggle += SwitchLockOn;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.camToggle -= SwitchLockOn;
     }
 
     #region Updates
@@ -149,14 +159,12 @@ public class PlayerController : MonoBehaviour
         if (currentXState == STATE.CROUCH)
             Crouch();
 
-        if (currentXState == STATE.ADS)
-            ADS();
-
         if ((InputManager.JumpWasPressed ||InputManager.JumpIsHeld)&& currentYState == STATE.GROUNDED)
             Jump();
 
         ExternalForces();
         Move();
+
     }
     #endregion
 
@@ -309,10 +317,41 @@ public class PlayerController : MonoBehaviour
 
     private void RotateCharacter(Vector3 moveDir)
     {
-        if (InputManager.Movement.magnitude > 0.001f)
+        if (camController.isLocked)
         {
-            Quaternion targetRot = Quaternion.LookRotation(moveDir, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+            var dir = camController.target.transform.position - transform.position;
+            dir.Normalize();
+            Quaternion dirRot = Quaternion.LookRotation(dir,Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, dirRot, rotationSpeed * Time.deltaTime);
+        }
+        else
+        {
+            if (InputManager.Movement.magnitude > 0.001f)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(moveDir, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+            }
+        }
+
+        if (InputManager.camLockOn)
+        {
+            // drive strafe tree
+            animator.SetFloat("MoveX", InputManager.Movement.x, 0.1f, Time.deltaTime);
+            animator.SetFloat("MoveY", InputManager.Movement.y, 0.1f, Time.deltaTime);
+        }
+    }
+
+    public void SwitchLockOn(bool lockon)
+    {
+        if (InputManager.camLockOn)
+        {
+
+            animator.CrossFadeInFixedTime("LockOnLocomotion", 0.25f);
+
+        }
+        else
+        {
+            animator.CrossFadeInFixedTime("Idle", 0.25f);
         }
     }
     #endregion
@@ -337,7 +376,7 @@ public class PlayerController : MonoBehaviour
         //}
 
         //gravity 
-        if (currentYState == STATE.FALL || currentYState == STATE.INAIR || currentYState == STATE.LAUNCH)
+        if (currentYState == STATE.FALL || currentYState == STATE.INAIR)
         {
             VerticalVelocity -= Gravity * 2 * Time.deltaTime;
         }
@@ -361,22 +400,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case STATE.INAIR:
-
-                if (VerticalVelocity > 0)
-                {
-                    currentYState = STATE.LAUNCH;
-                    break;
-                }
-                else if (VerticalVelocity < 0)
-                {
-                    currentYState = STATE.FALL;
-                    break;
-                }
-                break;
-
-            case STATE.LAUNCH:
-
-                if (VerticalVelocity < 0)   
+                if (VerticalVelocity < 0)
                 {
                     currentYState = STATE.FALL;
                     break;
@@ -398,16 +422,10 @@ public class PlayerController : MonoBehaviour
         switch (currentXState)
         {
             case STATE.IDLE:
-
+                if (!canMove) return;
                 if (InputManager.CrouchIsHeld)
                 {
                     currentXState = STATE.CROUCH;
-                    break;
-                }
-
-                if(InputManager.ADSIsHeld)
-                {
-                    currentXState = STATE.ADS;
                     break;
                 }
 
@@ -418,6 +436,7 @@ public class PlayerController : MonoBehaviour
                         currentXState = STATE.SPRINT;
                         break;
                     }
+                    TransitionAnimTo(STATE.WALK);
                     currentXState = STATE.WALK;
                     break;
                 }
@@ -427,13 +446,8 @@ public class PlayerController : MonoBehaviour
 
                 if (Mathf.Abs(InputManager.Movement.magnitude) < movementSens)
                 {
+                    TransitionAnimTo(STATE.IDLE);
                     currentXState = STATE.IDLE;
-                    break;
-                }
-
-                if (InputManager.ADSIsHeld)
-                {
-                    currentXState = STATE.ADS;
                     break;
                 }
 
@@ -463,12 +477,6 @@ public class PlayerController : MonoBehaviour
                         currentXState = STATE.WALK;
                     }
                 }
-
-                if (InputManager.ADSIsHeld)
-                {
-                    currentXState = STATE.ADS;
-                    break;
-                }
                 break;
 
             case STATE.CROUCH:
@@ -485,42 +493,35 @@ public class PlayerController : MonoBehaviour
                         currentXState = STATE.WALK;
                     }
                 }
-
-                if (InputManager.ADSIsHeld)
-                {
-                    currentXState = STATE.ADS;
-                    break;
-                }
-                break;
-
-            case STATE.ADS:
-
-                if(InputManager.ADSWasReleased || !InputManager.ADSIsHeld)
-                {
-                    if (Mathf.Abs(InputManager.Movement.magnitude) < movementSens)
-                    {
-                        currentXState = STATE.IDLE;
-                        break;
-                    }
-                    else
-                    {
-                        currentXState = STATE.WALK;
-                        break;
-                    }
-                }
-
                 break;
 
 
         }
     }
 
+    #region animation
+    private void TransitionAnimTo(STATE state)
+    {
+        if (InputManager.camLockOn)
+        { return; }
+            switch (state)
+        {
+            case STATE.WALK:
+                animator.CrossFadeInFixedTime("Jog", 0.25f);
+                break;
+            case STATE.IDLE:
+                animator.CrossFadeInFixedTime("Idle", 0.25f);
+                break;
+        }
+    }
+    #endregion
+
     public void GetStunned()
     {
         currentXState = STATE.STUNNED;
     }
 
-    public void RecoverStunned()
+    public void ToIdleState()
     {
         currentXState = STATE.IDLE;
     }
@@ -528,6 +529,11 @@ public class PlayerController : MonoBehaviour
     public void ToggleCanMove(bool canMove)
     {
         this.canMove = canMove;
+    }
+
+    public void DoAttack()
+    {
+        currentXState = STATE.ATTACK;
     }
 
     public bool GetCanMove()

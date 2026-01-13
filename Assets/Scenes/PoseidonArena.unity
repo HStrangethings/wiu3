@@ -689,7 +689,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418427179}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b328d10aad1daf4faf5eabd526ae588, type: 3}
   m_Name: 
@@ -1887,6 +1887,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   freeLookCam: {fileID: 949655873}
   lockOnCam: {fileID: 2099794847}
+  target: {fileID: 418427180}
+  isLocked: 0
 --- !u!1 &949655868
 GameObject:
   m_ObjectHideFlags: 0
