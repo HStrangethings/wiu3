@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30dd080ebc509c94fb3543afadbce30e, type: 3}
+  m_Name: Loki
+  m_EditorClassIdentifier: 
+  bossName: Loki
+  baseHealth: 0
+  baseAtk: 0
+  baseSpeed: 0
+  health01: 0
+  health: 0
+  atk: 0
+  speed: 0
+  bossRad: 0
+  bossMeleeReach: 0

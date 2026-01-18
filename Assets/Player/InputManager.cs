@@ -4,36 +4,39 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    public static PlayerInput PlayerInput;
+    public static InputManager Instance;
 
-    public static Vector2 Movement;
-    public static Vector2 Look;
+    public PlayerInput PlayerInput;
 
-    public static bool JumpWasPressed;
-    public static bool JumpIsHeld;
-    public static bool JumpWasReleased;
+    public Vector2 Movement;
+    public Vector2 Look;
 
-    public static bool SprintIsHeld;
+    public bool JumpWasPressed;
+    public bool JumpIsHeld;
+    public bool JumpWasReleased;
 
-    public static bool CrouchIsHeld;
+    public bool SprintIsHeld;
 
-    public static bool ADSIsHeld;
-    public static bool ADSWasReleased;
+    public bool CrouchIsHeld;
 
-    public static bool camLockOn;
-    public static event Action<bool> camToggle;
+    public bool camLockOn;
+    public event Action<bool> camToggle;
 
     private InputAction _moveAction;
     private InputAction _lookAction;
 
     private InputAction _jumpAction;
     private InputAction _sprintAction;
-    private InputAction _adsAction;
 
     private InputAction _lockOnAction;
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+
         PlayerInput = GetComponent<PlayerInput>();
 
         _moveAction = PlayerInput.actions["Move"];
@@ -58,7 +61,8 @@ public class InputManager : MonoBehaviour
 
         SprintIsHeld = _sprintAction.IsPressed();
 
-        if (_lockOnAction.WasPressedThisFrame()) { 
+        if (_lockOnAction.WasPressedThisFrame())
+        {
             camLockOn = !camLockOn;
             camToggle?.Invoke(camLockOn);
         }

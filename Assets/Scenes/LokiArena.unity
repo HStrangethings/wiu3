@@ -397,6 +397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 418427180}
+  - component: {fileID: 418427181}
   m_Layer: 0
   m_Name: Loki
   m_TagString: Untagged
@@ -420,6 +421,31 @@ Transform:
   - {fileID: 48228025}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &418427181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418427179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60b5fdc01b12ae40b9ee58809b10708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boss: {fileID: 11400000, guid: 4a37acbf18a04f14b9315ad01d386b4d, type: 2}
+  sm: {fileID: 0}
+  mm: {fileID: 0}
+  player: {fileID: 0}
+  rb: {fileID: 0}
+  animator: {fileID: 0}
+  hitboxManager: {fileID: 0}
+  losBlockMask:
+    serializedVersion: 2
+    m_Bits: 0
+  DebugText: {fileID: 0}
+  coinProj: {fileID: 983871685149424645, guid: a56992aeea53db142a2fcae53405be55, type: 3}
+  Harms: {fileID: 0}
 --- !u!1 &1109149261
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: b60b5fdc01b12ae40b9ee58809b10708
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - boss: {fileID: 11400000, guid: 4a37acbf18a04f14b9315ad01d386b4d, type: 2}
+  - sm: {instanceID: 0}
+  - mm: {instanceID: 0}
+  - player: {instanceID: 0}
+  - rb: {instanceID: 0}
+  - animator: {instanceID: 0}
+  - hitboxManager: {instanceID: 0}
+  - DebugText: {instanceID: 0}
+  - Harms: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
