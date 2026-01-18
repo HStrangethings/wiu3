@@ -4,11 +4,13 @@ public class LokiMelee : BossMove
 {
     private LokiBoss boss;
     private float animSpeed;
+    private string animation;
 
-    public LokiMelee(LokiBoss boss, float animSpeed) : base(boss)
+    public LokiMelee(LokiBoss boss, float animSpeed, string animation) : base(boss)
     {
         this.boss = boss;
         this.animSpeed = animSpeed;
+        this.animation = animation;
     }
     public override void Start()
     {
@@ -64,7 +66,7 @@ public class LokiMelee : BossMove
     }
     public override BossMove Clone()
     {
-        return new LokiMelee(this.boss, this.animSpeed);
+        return new LokiMelee(this.boss, this.animSpeed, this.animation);
     }
 
 }

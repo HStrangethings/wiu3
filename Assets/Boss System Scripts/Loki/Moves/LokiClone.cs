@@ -21,15 +21,15 @@ public class LokiClone : BossMove
         switch (move)
         {
             case LokiBoss.ATTACK.Melee:
-                boss.mm.PlayMove("LokiMelee");
+                boss.mm.PlayMove("LokiFakeMelee");
                 break;
 
             case LokiBoss.ATTACK.Range:
-                boss.mm.PlayMove("LokiRange");
+                boss.mm.PlayMove("LokiFakeRange");
                 break;
 
             case LokiBoss.ATTACK.QuickMelee:
-                boss.mm.PlayMove("LokiQuickMelee");
+                boss.mm.PlayMove("LokiFakeQuickMelee");
                 break;
         }
     }

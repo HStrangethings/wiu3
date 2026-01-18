@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30dd080ebc509c94fb3543afadbce30e, type: 3}
   m_Name: Loki
   m_EditorClassIdentifier: 
-  bossName: 
+  bossName: Loki
   baseHealth: 0
   baseAtk: 0
   baseSpeed: 0

@@ -23,11 +23,14 @@ public class LokiBoss : BossBehaviour
         sm.AddState(new LokiAttack(sm, this));
         sm.AddState(new LokiInvis(sm, this));
 
-
         //add all the bosses attacks
-        mm.AddMove("LokiMelee", new LokiMelee(this, 0.1f));
-        mm.AddMove("LokiQuickMelee", new LokiMelee(this, 0.3f));
+        mm.AddMove("LokiMelee", new LokiMelee(this, 0.1f,"CardSlash"));
+        mm.AddMove("LokiQuickMelee", new LokiMelee(this, 0.3f, "CardSlash"));
         mm.AddMove("LokiRange", new LokiRange(this, 5f));
+
+        mm.AddMove("LokiFakeMelee", new LokiMelee(this, 0.1f, "FakeCardSlash"));
+        mm.AddMove("LokiFakeQuickMelee", new LokiMelee(this, 0.1f, "FakeCardSlash"));
+        mm.AddMove("LokiFakeRange", new LokiRange(this, 5f));
 
         mm.AddMove("LokiCloneMelee", new LokiClone(this, ATTACK.Melee));
         mm.AddMove("LokiCloneQuickMelee", new LokiClone(this, ATTACK.QuickMelee));
