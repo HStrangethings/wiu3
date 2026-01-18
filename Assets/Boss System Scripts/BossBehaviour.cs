@@ -125,6 +125,20 @@ public class BossBehaviour : MonoBehaviour
         return false;
     }
 
+    public float ToPlayerAngle()
+    {
+        Vector3 toPlayer = player.transform.position - transform.position;
+        toPlayer.y = 0f; // ignore vertical difference
+
+        float angle = Vector3.SignedAngle(
+            transform.forward,
+            toPlayer.normalized,
+            Vector3.up
+        );
+
+        return angle;
+    }
+
     public void CurrentBossDebug()
     {
         //print out current states. they dont have names, just print out class name
@@ -152,6 +166,7 @@ public class BossBehaviour : MonoBehaviour
                 i++;
             }
         }
+        sb.AppendLine($"AngleToPlayer: {ToPlayerAngle()}");
 
         DebugText.text = sb.ToString();
     }

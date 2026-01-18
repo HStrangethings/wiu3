@@ -1,4 +1,3 @@
-using System.Threading;
 using UnityEngine;
 
 public class PosIdleState : BossState
@@ -14,6 +13,7 @@ public class PosIdleState : BossState
 
     public override void Enter()
     {
+        needMove = false;
         timer = 0;
 
         bossStat = boss.boss;
@@ -32,7 +32,11 @@ public class PosIdleState : BossState
     {
         //Debug.Log("Currently in Poseidon Idle State");
         var dist = boss.DistanceToPlayer();
-
+        if (bossStat.health01 <= 0.5)
+        {
+            sm.ChangeState<PoseidonSecondState>();
+            return;
+        }
         if (timer < idleDur) { 
             timer += Time.deltaTime;
 

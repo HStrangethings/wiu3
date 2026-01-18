@@ -23,7 +23,8 @@ public class PoseidonSecondState : BossState
         {
             boss.mm.PlayMove("rain");
             boss.animator.Play("New State");
-            sm.ChangeState<PosAttackState>();
+            sm.ChangeState<PoseidonSecondStateIdle>();
+            return;
         }
     }
 
@@ -36,6 +37,7 @@ public class PoseidonSecondState : BossState
     public override void ComboFin()
     {
         base.ComboFin();
-        boss.sm.ChangeState<PosAttackState>();
+        sm.ChangeState<PoseidonSecondStateIdle>();
+        return;
     }
 }

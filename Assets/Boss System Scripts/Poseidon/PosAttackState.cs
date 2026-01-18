@@ -29,8 +29,11 @@ public class PosAttackState : BossState
 
     public override void Execute()
     {
-        Quaternion rotateToPlayer = boss.RotateToPlayer();
-        boss.transform.rotation = rotateToPlayer;
+        if (bossStat.health01 <= 0.5)
+        {
+            sm.ChangeState<PoseidonSecondState>();
+            return;
+        }
     }
 
     public override void Exit()
@@ -42,6 +45,6 @@ public class PosAttackState : BossState
     public override void ComboFin()
     {
         base.ComboFin();
-        boss.sm.ChangeState<PosIdleState>();
+        sm.ChangeState<PosIdleState>();
     }
 }

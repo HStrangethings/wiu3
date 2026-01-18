@@ -37,7 +37,7 @@ public class PoseidonBoss : BossBehaviour
         mm.AddMove("rain", new PosRainMove(this));
 
         //start the statemachine with its first state
-        sm.Initialize<PoseidonSecondState>();
+        sm.Initialize<PosIdleState>();
 
         hitboxManager.SetGroupMoveMachines(Harms, mm);
     }
@@ -45,5 +45,10 @@ public class PoseidonBoss : BossBehaviour
     private void Update()
     {
         CurrentBossDebug();
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            boss.health -= 50;
+            boss.RecalcHealth01();
+        }
     }
 }

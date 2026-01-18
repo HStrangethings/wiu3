@@ -42,6 +42,6 @@ public class PoseidonSecondStateAttack : BossState
     public override void ComboFin()
     {
         base.ComboFin();
-        boss.sm.ChangeState<PosIdleState>();
+        sm.ChangeState<PoseidonSecondStateIdle>();
     }
 }

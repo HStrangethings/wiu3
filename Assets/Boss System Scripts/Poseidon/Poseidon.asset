@@ -16,8 +16,8 @@ MonoBehaviour:
   baseHealth: 100
   baseAtk: 50
   baseSpeed: 2
-  health01: 0
-  health: 100
+  health01: 0.5
+  health: 50
   atk: 50
   speed: 2
   bossRad: 6

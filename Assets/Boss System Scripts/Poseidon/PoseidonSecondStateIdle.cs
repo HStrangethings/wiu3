@@ -13,6 +13,7 @@ public class PoseidonSecondStateIdle : BossState
 
     public override void Enter()
     {
+        needMove = false;
         timer = 0;
 
         bossStat = boss.boss;
@@ -56,7 +57,7 @@ public class PoseidonSecondStateIdle : BossState
         else
         {
             Debug.Log("Entering AttackState");
-            sm.ChangeState<PosAttackState>();
+            sm.ChangeState<PoseidonSecondStateAttack>();
             return;
 
         }
