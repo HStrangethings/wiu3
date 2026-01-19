@@ -866,6 +866,7 @@ MonoBehaviour:
   singleSlash: {fileID: 3899947577667033225, guid: fda38ba2a85950e488c8f74f8a074057, type: 3}
   crossSlash: {fileID: 3899947577667033225, guid: dd27e190cd52d6c43a8fa247cb8d3aa3, type: 3}
   laserBeam: {fileID: 7102787886357804716, guid: f3ce2f433a06b0a4885972f56074b59b, type: 3}
+  coralFanBeamPrefab: {fileID: 662226444344562033, guid: c06ebe72ac3c41f4db2ca80fcbc32109, type: 3}
 --- !u!114 &1375878408
 MonoBehaviour:
   m_ObjectHideFlags: 0

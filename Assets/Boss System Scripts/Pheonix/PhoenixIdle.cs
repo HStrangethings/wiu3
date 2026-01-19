@@ -23,6 +23,11 @@ public class PhoenixIdle : BossState
         {
             boss.mm.PlayMove("PhoenixCharge");
         }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            boss.mm.PlayMove("CoralFan");
+        }
         //if (needMove)
         //{
         //    Vector3 chasePlayerVel = boss.MoveToPlayer();

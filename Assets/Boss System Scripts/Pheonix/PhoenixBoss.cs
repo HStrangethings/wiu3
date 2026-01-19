@@ -5,6 +5,7 @@ public class PhoenixBoss : BossBehaviour
     public GameObject singleSlash;
     public GameObject crossSlash;
     public GameObject laserBeam;
+    public GameObject coralFanBeamPrefab;
     public override void Start()
     {
         base.Start();
@@ -19,6 +20,7 @@ public class PhoenixBoss : BossBehaviour
         mm.AddMove("TripleCrossEnergySlash", new TripleSlash(this, 50, 1));
         mm.AddMove("LaserBeam", new LaserBeam(this, 3f));
         mm.AddMove("PhoenixCharge", new PhoenixCharge(this, 25f, 1.5f, 2.5f));
+        mm.AddMove("CoralFan", new CoralFan(this, coralFanBeamPrefab, crossOffset: 8f, swipeDuration: 0.7f, rollAngle: 45f));
         //mm.AddMove("posMelee", new PosMeleeAttack(this)); //default wave xSize is 9.5
         //mm.AddMove("boatShield", new BoatShield(this, 50)); //default wave xSize is 9.5
 
