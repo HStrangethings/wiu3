@@ -808,6 +808,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1375878406}
+  - component: {fileID: 1375878411}
+  - component: {fileID: 1375878410}
+  - component: {fileID: 1375878409}
+  - component: {fileID: 1375878408}
+  - component: {fileID: 1375878407}
   m_Layer: 0
   m_Name: Pheonix
   m_TagString: Untagged
@@ -835,6 +840,95 @@ Transform:
   - {fileID: 1952698978}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1375878407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375878405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a615d8dc05de6704cb4b1e5401b48f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boss: {fileID: 11400000, guid: 43e3fc8f6dd37fc45bdad02118928de2, type: 2}
+  sm: {fileID: 0}
+  mm: {fileID: 0}
+  player: {fileID: 0}
+  rb: {fileID: 0}
+  animator: {fileID: 0}
+  hitboxManager: {fileID: 0}
+  losBlockMask:
+    serializedVersion: 2
+    m_Bits: 0
+  singleSlash: {fileID: 3899947577667033225, guid: fda38ba2a85950e488c8f74f8a074057, type: 3}
+  crossSlash: {fileID: 3899947577667033225, guid: dd27e190cd52d6c43a8fa247cb8d3aa3, type: 3}
+  laserBeam: {fileID: 7102787886357804716, guid: f3ce2f433a06b0a4885972f56074b59b, type: 3}
+--- !u!114 &1375878408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375878405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c57e0569713674d987c0c86cf03ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1375878409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375878405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821dab06ce86a334cb23fc78453f8b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1375878410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375878405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b649cec9c8285ab4ba2f2aea38084cd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastHitTime: 1
+--- !u!54 &1375878411
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375878405}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1391131050
 GameObject:
   m_ObjectHideFlags: 0

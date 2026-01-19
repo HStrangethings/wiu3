@@ -18,12 +18,17 @@ public class PhoenixIdle : BossState
         {
             boss.mm.PlayMove("LaserBeam");
         }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            boss.mm.PlayMove("PhoenixCharge");
+        }
         //if (needMove)
         //{
         //    Vector3 chasePlayerVel = boss.MoveToPlayer();
         //    boss.rb.linearVelocity = chasePlayerVel;
         //}
-       boss.rb.linearVelocity = Vector3.zero;
+        boss.rb.linearVelocity = Vector3.zero;
         Quaternion rotateToPlayer = boss.RotateToPlayer();
         boss.transform.rotation = rotateToPlayer;
     }
