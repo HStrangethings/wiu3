@@ -3,12 +3,12 @@ using UnityEngine;
 public class PhoenixCharge : BossMove
 {
     private PhoenixBoss boss;
+
     private float chargeSpeed;
     private float chargeDuration;
     private float stopDistance;
 
     private float timer;
-    private bool started;
     private bool comboChecked;
 
     private Vector3 chargeDir;
@@ -25,19 +25,24 @@ public class PhoenixCharge : BossMove
     public override void Start()
     {
         timer = 0f;
-        started = true;
         comboChecked = false;
 
-        // Lock direction ONCE (straight charge)
-        Vector3 toPlayer = (boss.player.transform.position - boss.transform.position);
+        // Defensive: in case player spawns late or tag missing
+        // BossBehaviour normally sets this in Start() using "Player" tag. :contentReference[oaicite:3]{index=3}
+        if (boss.player == null)
+            boss.player = GameObject.FindGameObjectWithTag("Player");
+
+        // Lock direction ONCE (straight charge, not homing)
+        Vector3 toPlayer = boss.DistanceToPlayer(); // uses BossBehaviour helper :contentReference[oaicite:4]{index=4}
         toPlayer.y = 0f;
+
         chargeDir = toPlayer.sqrMagnitude > 0.001f ? toPlayer.normalized : boss.transform.forward;
 
         // Face the charge direction
         if (chargeDir.sqrMagnitude > 0.001f)
             boss.transform.rotation = Quaternion.LookRotation(chargeDir);
 
-        // Optional: enable a hitbox group for charge damage (if you have one)
+        // Optional: If you have a HitboxGroup for charge, enable it here.
         // boss.hitboxManager.EnableGroup("Charge", true);
         // boss.hitboxManager.SetGroupHitReports("Charge", GetType());
         // boss.hitboxManager.SetGroupMoveMachines("Charge", boss.mm);
@@ -47,19 +52,21 @@ public class PhoenixCharge : BossMove
     {
         timer += Time.deltaTime;
 
-        // Move forward (physics-friendly)
+        // Move forward
         boss.rb.linearVelocity = chargeDir * chargeSpeed;
 
+        // Use the same combo detail method as EnergySlash :contentReference[oaicite:5]{index=5}
+        boss.BossMoveComboDetails(GetType(), out bool hit, out bool LOS, out float dist);
+
         // Stop early if close enough
-        float dist = Vector3.Distance(boss.transform.position, boss.player.transform.position);
         if (dist <= stopDistance)
         {
             FinishAndComboCheck();
             return;
         }
 
-        // If we hit the player during the dash, end quickly (same style as EnergySlash)
-        if (!comboChecked && timer >= 0.1f && boss.mm.HitConfirmed(GetType()))
+        // End quickly if hit confirmed after a short minimum time
+        if (!comboChecked && timer >= 0.1f && hit)
         {
             FinishAndComboCheck();
             return;
@@ -86,7 +93,9 @@ public class PhoenixCharge : BossMove
 
     public override void End()
     {
+        // Optional: disable charge hitbox group
         // boss.hitboxManager.EnableGroup("Charge", false);
+
         boss.rb.linearVelocity = Vector3.zero;
         base.End();
     }
@@ -99,12 +108,13 @@ public class PhoenixCharge : BossMove
                 boss.BossMoveComboDetails(GetType(), out bool hit, out bool LOS, out float dist);
 
                 bool close = dist < 10f;
-                bool far = dist >= 10f;
 
                 string nextMoveId = "null";
 
-                // Example chaining logic (tune however you like)
+                // Example chaining logic (edit to your taste)
+                // If charge hit and we're still close, follow with melee / slash.
                 if (hit && close) nextMoveId = boss.mm.Choose("posMelee", "EnergySlash");
+                // If it missed but boss has LOS, try a ranged option.
                 else if (!hit && LOS) nextMoveId = boss.mm.Choose("LaserBeam", "EnergySlash");
                 else nextMoveId = "null";
 

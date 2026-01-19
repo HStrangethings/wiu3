@@ -18,7 +18,7 @@ public class PhoenixBoss : BossBehaviour
         mm.AddMove("CrossEnergySlash", new EnergySlash(this, 50, 1));
         mm.AddMove("TripleCrossEnergySlash", new TripleSlash(this, 50, 1));
         mm.AddMove("LaserBeam", new LaserBeam(this, 3f));
-        mm.AddMove("PhoenixCharge", new PhoenixCharge(this, 25f, 0.9f, 2.5f));
+        mm.AddMove("PhoenixCharge", new PhoenixCharge(this, 25f, 1.5f, 2.5f));
         //mm.AddMove("posMelee", new PosMeleeAttack(this)); //default wave xSize is 9.5
         //mm.AddMove("boatShield", new BoatShield(this, 50)); //default wave xSize is 9.5
 
