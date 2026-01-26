@@ -6,12 +6,16 @@ public class PhoenixBoss : BossBehaviour
     public GameObject crossSlash;
     public GameObject laserBeam;
     public GameObject coralFanBeamPrefab;
+    public bool phase2 = false;
     public override void Start()
     {
         base.Start();
         //add all the bosses states
         //pass in the statemachine and this boss instance to the state
-        sm.AddState(new PhoenixIdle(sm, this));
+        //sm.AddState(new PhoenixIdle(sm, this));
+        sm.AddState(new PhoenixIdleState(sm, this));
+        sm.AddState(new PhoenixAttackState(sm, this));
+        sm.AddState(new PhoenixSecondState(sm, this));
 
         //add all the bosses attacks
         mm.AddMove("EnergySlash", new EnergySlash(this, 50, 0));
@@ -25,8 +29,9 @@ public class PhoenixBoss : BossBehaviour
         //mm.AddMove("boatShield", new BoatShield(this, 50)); //default wave xSize is 9.5
 
         //start the statemachine with its first state
-        sm.Initialize<PhoenixIdle>();
+        //sm.Initialize<PhoenixIdle>();
+        sm.Initialize<PhoenixIdleState>();
 
-       // hitboxManager.SetGroupMoveMachines(Harms, mm);
+        // hitboxManager.SetGroupMoveMachines(Harms, mm);
     }
 }
