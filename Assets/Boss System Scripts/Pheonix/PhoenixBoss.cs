@@ -18,7 +18,9 @@ public class PhoenixBoss : BossBehaviour
         sm.AddState(new PhoenixSecondState(sm, this));
 
         //add all the bosses attacks
+
         mm.AddMove("EnergySlash", new EnergySlash(this, 50, 0));
+        mm.AddMove("EnergySlash2", new EnergySlash(this, 100, 0));// i can change the pararmeters to enhance it
         mm.AddMove("TripleSlash", new TripleSlash(this, 50, 0));
         mm.AddMove("CrossEnergySlash", new EnergySlash(this, 50, 1));
         mm.AddMove("TripleCrossEnergySlash", new TripleSlash(this, 50, 1));
