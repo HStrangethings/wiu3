@@ -632,6 +632,8 @@ GameObject:
   - component: {fileID: 418427186}
   - component: {fileID: 418427184}
   - component: {fileID: 418427185}
+  - component: {fileID: 418427187}
+  - component: {fileID: 418427188}
   m_Layer: 6
   m_Name: Poseison
   m_TagString: Untagged
@@ -775,6 +777,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c57e0569713674d987c0c86cf03ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &418427187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418427179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0024374a50400c745b6b90f7ec03422b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &418427188
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418427179}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.2, y: 6.03, z: 9.02}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &425091841
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,6 +2356,38 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170404675}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1201378776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+  m_PrefabInstance: {fileID: 2099247707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1201378777
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201378776}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+  m_Controller: {fileID: 9100000, guid: fc092cdacc9b6d046a4ae8420b88ff2d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'Hip'\n\tTransform 'Neck'\n\tTransform 'L_Wrist_jnt'\n\tTransform
+    'L_Clavicle_jnt'\n\tTransform 'Spine1'\n\tTransform 'L_UpperLeg_jnt'\n\tTransform
+    'Hip'\n\tTransform 'L_LowerArm_jnt'\n\tTransform 'R_Clavicle_jnt'\n\tTransform
+    'L_Ankle_jnt'\n\tand more ...\n\tFrom animation clip 'Take 001'"
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1202653039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2956,6 +3023,9 @@ GameObject:
   - component: {fileID: 1620172911}
   - component: {fileID: 1620172910}
   - component: {fileID: 1620172909}
+  - component: {fileID: 1620172913}
+  - component: {fileID: 1620172915}
+  - component: {fileID: 1620172916}
   m_Layer: 9
   m_Name: sword
   m_TagString: Untagged
@@ -3005,9 +3075,9 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3066,6 +3136,64 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620172907}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1620172913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620172907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b792b40316164c4eb9de2deaaa0d9d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  damageName: Sword?
+  isActive: 1
+  hasVFX: 0
+  impactVFX: {fileID: 0}
+--- !u!114 &1620172915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620172907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59589803524069541a98e8742693ea5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: 1620172913}
+--- !u!54 &1620172916
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620172907}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1623004547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4071,6 +4199,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: {fileID: 11400000, guid: 81edd57623e9612409d561f1d2ec0c8e, type: 2}
+--- !u!1001 &2099247707
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -38.121384
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.49
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -17.20651
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+      propertyPath: m_Name
+      value: Poseidon_Attack_01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1201378777}
+  m_SourcePrefab: {fileID: 100100000, guid: 05b2ecebc3c7d6c40a21c20ebc724299, type: 3}
 --- !u!1 &2099794844
 GameObject:
   m_ObjectHideFlags: 0
@@ -4264,3 +4452,4 @@ SceneRoots:
   - {fileID: 949655874}
   - {fileID: 2099794848}
   - {fileID: 1990745428}
+  - {fileID: 2099247707}
