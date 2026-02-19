@@ -57,7 +57,7 @@ public class DamageDealer : MonoBehaviour, ITriggerReceiver
 
 
         //Add an effect here, or add an effect on player hit, depends
-        Quaternion rot = Quaternion.LookRotation(normal, Vector3.up);
-        Instantiate(impactVFX, hitPoint + normal * 0.02f, rot);
+        //Quaternion rot = Quaternion.LookRotation(normal, Vector3.up);
+        //Instantiate(impactVFX, hitPoint + normal * 0.02f, rot);
     }
 }

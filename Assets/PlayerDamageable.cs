@@ -74,7 +74,7 @@ public class PlayerDamageable : Damageable
     {
         weaponController.RecoverAttack();
         playerController.ToIdleState();
-        animator.Play("Sword And Shield Idle 1");
+        animator.Play("Idle");
     }
 
     private IEnumerator WaitForStunAnimThenRecover(string stateName, int layer)

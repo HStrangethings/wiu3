@@ -18,7 +18,7 @@ public class OnTriggerHandler : MonoBehaviour
             {
                 receiver.OnTrigger(other);
             }
-            // else: ignore scripts that don't use this interface
         }
+        Debug.Log($"OnTriggerEnter on {other.gameObject.name}");
     }
 }
