@@ -2,34 +2,50 @@ using UnityEngine;
 
 public class PhoenixIdle : BossState
 {
-    public PhoenixIdle(BossStateMachine sm, BossBehaviour boss) : base(sm, boss) { }
-    private float timer = 0;
+    private float cooldownTimer;
 
-    BossStats bossStat;
+    // Tweak these in code (or convert to BossStats later)
+    private readonly float attackCooldown = 2.0f;
+    private readonly float attackRange = 6.0f;
+
+    public PhoenixIdle(BossStateMachine sm, BossBehaviour boss) : base(sm, boss) { }
 
     public override void Enter()
     {
-
+        cooldownTimer = 0f;
+        // Optional: play idle animation if you have one
+        // boss.mm.PlayMove("Idle");
     }
 
     public override void Execute()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        // Stop movement
+        boss.rb.linearVelocity = Vector3.zero;
+
+        // Face player
+        boss.transform.rotation = boss.RotateToPlayer();
+
+        // Wait cooldown
+        cooldownTimer += Time.deltaTime;
+
+        // Check distance to decide attack
+        // IMPORTANT: change boss.player to your actual player reference if needed
+        if (boss.player == null) return;
+
+        float dist = Vector3.Distance(boss.transform.position, boss.player.transform.position);
+
+        if (cooldownTimer >= attackCooldown && dist <= attackRange)
         {
-            boss.mm.PlayMove("LaserBeam");
+            sm.ChangeState<PhoenixAttack>();
         }
-        //if (needMove)
-        //{
-        //    Vector3 chasePlayerVel = boss.MoveToPlayer();
-        //    boss.rb.linearVelocity = chasePlayerVel;
-        //}
-       boss.rb.linearVelocity = Vector3.zero;
-        Quaternion rotateToPlayer = boss.RotateToPlayer();
-        boss.transform.rotation = rotateToPlayer;
     }
 
     public override void Exit()
     {
-        //Debug.Log("Exitting Poseidon Idle State");
+    }
+
+    public override void ComboFin()
+    {
+        // Idle usually doesn't care about combo finishing
     }
 }
