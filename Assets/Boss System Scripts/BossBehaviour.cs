@@ -13,7 +13,7 @@ public class BossBehaviour : MonoBehaviour
 
     //keep track of player
     [HideInInspector]
-    public GameObject player;
+    public GameObject currPlayer;
     private PlayerWeaponController playerWeapon;
 
     //own components
@@ -32,8 +32,8 @@ public class BossBehaviour : MonoBehaviour
     {
         sm = GetComponent<BossStateMachine>();
         mm = GetComponent<BossMoveMachine>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerWeapon = player.GetComponentInChildren<PlayerWeaponController>();
+        currPlayer = GameObject.FindGameObjectWithTag("Player");
+        playerWeapon = currPlayer.GetComponentInChildren<PlayerWeaponController>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         hitboxManager = GetComponent<HitboxManager>();
@@ -47,7 +47,7 @@ public class BossBehaviour : MonoBehaviour
 
     public Vector3 DistanceToPlayer()
     {
-        return player.transform.position - rb.position;
+        return currPlayer.transform.position - rb.position;
     }
 
     public Vector3 MoveToPlayer()
@@ -61,7 +61,7 @@ public class BossBehaviour : MonoBehaviour
 
     public Quaternion RotateToPlayer()
     {
-        if (player == null) return Quaternion.identity;
+        if (currPlayer == null) return Quaternion.identity;
 
         Vector3 dir = DistanceToPlayer();
         dir.y = 0;
@@ -81,10 +81,10 @@ public class BossBehaviour : MonoBehaviour
 
     public bool HasLOS()
     {
-        if (player == null) return false;
+        if (currPlayer == null) return false;
 
         Vector3 origin = transform.position;
-        Vector3 target = player.transform.position;
+        Vector3 target = currPlayer.transform.position;
         Vector3 toTarget = DistanceToPlayer();
 
         float dist = toTarget.magnitude;
@@ -127,7 +127,7 @@ public class BossBehaviour : MonoBehaviour
 
     public float ToPlayerAngle()
     {
-        Vector3 toPlayer = player.transform.position - transform.position;
+        Vector3 toPlayer = currPlayer.transform.position - transform.position;
         toPlayer.y = 0f; // ignore vertical difference
 
         float angle = Vector3.SignedAngle(
@@ -179,10 +179,10 @@ public class BossBehaviour : MonoBehaviour
         // Draw sphere around the boss
         Gizmos.DrawWireSphere(transform.position, boss.bossRad);
 
-        if (player == null) return;
+        if (currPlayer == null) return;
 
         Vector3 origin = transform.position;
-        Vector3 target = player.transform.position;
+        Vector3 target = currPlayer.transform.position;
 
         bool canSee = HasLOS();
 

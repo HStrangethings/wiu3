@@ -3,101 +3,138 @@ using UnityEngine;
 public class EnergySlash : BossMove
 {
     private PhoenixBoss boss;
-    private float projSpeed;
-    private int SlashORCross;
-    public EnergySlash(PhoenixBoss boss, float projSpeed,int SlashORCross) : base(boss)
+    private int slashOrCross; // kept for compatibility
+
+    private float timer;
+    private bool ended;
+
+    private Vector3 startPos;
+    private Vector3 dashDir;
+
+    public EnergySlash(PhoenixBoss boss, float unused, int slashOrCross) : base(boss)
     {
         this.boss = boss;
-        this.projSpeed = projSpeed;
-        this.SlashORCross = SlashORCross;
+        this.slashOrCross = slashOrCross;
     }
-    private float timer = 0;
-    bool fired;
-    bool comboChecked;
-    private GameObject proj;
 
-    private GameObject usingPrefab;
-
-    private float comboCheckTime = 1.5f;
     public override void Start()
     {
-        if (SlashORCross == 0)
-        {
-            usingPrefab = boss.singleSlash;
-        }
-        else { usingPrefab = boss.crossSlash; }
+        isFinished = false;
+        ended = false;
+        timer = 0f;
 
-            Debug.Log("Starting WaterBlast");
-        proj = Object.Instantiate(usingPrefab, boss.transform.position + boss.transform.forward * 9, Quaternion.LookRotation(boss.transform.forward));
-        SetupBossHitReporting(proj);
+        startPos = boss.transform.position;
+
+        dashDir = GetFlatDirToPlayer();
+        if (dashDir.sqrMagnitude < 0.0001f)
+            dashDir = boss.transform.forward;
+
+        SetLegHitboxes(false);
+
+        boss.animator.Play("Melee");
     }
+
     public override void Execute()
     {
+        if (ended) return;
+
         timer += Time.deltaTime;
 
-        if (!fired)
-        {
-            fired = true;
-            if (proj != null)
-            {
-                var projRb = proj.GetComponent<Rigidbody>();
-                projRb.AddForce(projRb.transform.forward * projSpeed, ForceMode.Impulse);
-            }
-        }
+        // Optional: rotate while attacking
+        boss.transform.rotation = boss.RotateToPlayer();
 
-
-        if (!comboChecked && timer >= 0.2f && boss.mm.HitConfirmed(GetType()))
-        {
-            comboChecked = true;
-            AnimEvent("comboCheck");
-            isFinished = true;
-            return;
-        }
-
-        //call its own comboCheck instead of animation
-        if (!comboChecked && timer >= comboCheckTime)
-        {
-            comboChecked = true;
-            AnimEvent("comboCheck");
-            isFinished = true;
-        }
+        ApplyKinematicMeleeMotion(timer);
     }
+
     public override void End()
     {
-        Debug.Log("Ending WaterBlast");
+        SetLegHitboxes(false);
         base.End();
     }
+
+    private void ApplyKinematicMeleeMotion(float t)
+    {
+        float duration = Mathf.Max(0.01f, boss.meleeMoveDuration);
+        float liftPortion = Mathf.Clamp01(boss.meleeLiftPortion);
+        float liftHeight = boss.meleeLiftHeight;
+        float dashDistance = boss.meleeDashDistance;
+
+        AnimationCurve curve = boss.meleeMoveCurve != null
+            ? boss.meleeMoveCurve
+            : AnimationCurve.Linear(0, 0, 1, 1);
+
+        float norm = Mathf.Clamp01(t / duration);
+
+        // Update dash direction during dash phase (optional)
+        if (norm >= liftPortion)
+        {
+            Vector3 newDir = GetFlatDirToPlayer();
+            if (newDir.sqrMagnitude > 0.0001f)
+                dashDir = newDir;
+        }
+
+        Vector3 targetPos;
+
+        if (norm < liftPortion)
+        {
+            float phaseT = Mathf.Clamp01(norm / Mathf.Max(0.0001f, liftPortion));
+            float eased = curve.Evaluate(phaseT);
+            targetPos = startPos + Vector3.up * (liftHeight * eased);
+        }
+        else
+        {
+            float dashPortion = Mathf.Max(0.0001f, 1f - liftPortion);
+            float phaseT = Mathf.Clamp01((norm - liftPortion) / dashPortion);
+            float eased = curve.Evaluate(phaseT);
+
+            Vector3 peakPos = startPos + Vector3.up * liftHeight;
+            targetPos = peakPos + dashDir * (dashDistance * eased);
+        }
+
+        // Kinematic-safe movement:
+        // MovePosition is correct for kinematic RBs, but if it still doesn't move in your project,
+        // switch to transform.position (commented below).
+        if (boss.rb != null)
+            boss.rb.MovePosition(targetPos);
+        else
+            boss.transform.position = targetPos;
+
+        // If MovePosition doesn’t work for your setup, use this instead:
+        // boss.transform.position = targetPos;
+    }
+
+    private Vector3 GetFlatDirToPlayer()
+    {
+        if (boss.currPlayer == null) return Vector3.zero;
+        Vector3 toPlayer = boss.currPlayer.transform.position - boss.transform.position;
+        toPlayer.y = 0f;
+        return toPlayer.normalized;
+    }
+
+    private void SetLegHitboxes(bool on)
+    {
+        if (boss.legHitboxes == null) return;
+        foreach (var col in boss.legHitboxes)
+            if (col != null) col.enabled = on;
+    }
+
     public override void AnimEvent(string evt)
     {
         switch (evt)
         {
-            case "start":
-                //spawn projectile to start its own animation
+            case "hitOn":
+                SetLegHitboxes(true);
+                break;
+
+            case "hitOff":
+                //  ONLY disable hitboxes, DO NOT end the move
+                SetLegHitboxes(false);
                 break;
 
             case "end":
-                var projRb = proj.GetComponent<Rigidbody>();
-                projRb.AddForce(projRb.transform.forward * projSpeed, ForceMode.Impulse);
-                isFinished = true;
-                break;
-            case "comboCheck":
-                boss.BossMoveComboDetails(GetType(), out bool hit, out bool LOS, out float dist);
-                //Debug.Log(hit);
-
-                bool close = dist < 15f;
-                bool far = dist > 15f;
-                string nextMoveId = "null";
-
-                //if (hit && !LOS) { nextMoveId = boss.mm.Choose("waterWave", "null"); }
-                //else if (hit && close) { nextMoveId = boss.mm.Choose("posMelee", "wideWaterBlast"); }
-                //else if (hit && far) { nextMoveId = boss.mm.Choose("waterWave", "boatShield", "null"); }
-                //else if (!hit && LOS) { nextMoveId = boss.mm.Choose("wideWaterBlast", "waterWave"); }
-                //else { nextMoveId = boss.mm.Choose("waterWave", "posMelee", "null"); }
-
-                if (!string.IsNullOrEmpty(nextMoveId))
-                {
-                    boss.mm.PlayMove(nextMoveId);
-                }
+                //  End the move here (animation timed)
+                SetLegHitboxes(false);
+                ended = true;
                 isFinished = true;
                 break;
         }
@@ -105,6 +142,6 @@ public class EnergySlash : BossMove
 
     public override BossMove Clone()
     {
-        return new EnergySlash(this.boss, this.projSpeed, this.SlashORCross);
+        return new EnergySlash(this.boss, 0f, this.slashOrCross);
     }
 }

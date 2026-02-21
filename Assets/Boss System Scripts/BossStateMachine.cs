@@ -42,6 +42,7 @@ public class BossStateMachine : MonoBehaviour
     private void Update()
     {
         currentState?.Execute();
+        if (currentState == null) Debug.Log("BossStateMachine: currentState is NULL");
     }
 
     public void ComboFin()

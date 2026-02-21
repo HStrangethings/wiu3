@@ -4,48 +4,54 @@ public class PhoenixIdle : BossState
 {
     private float cooldownTimer;
 
-    // Tweak these in code (or convert to BossStats later)
-    private readonly float attackCooldown = 2.0f;
-    private readonly float attackRange = 6.0f;
+    private readonly float attackCooldown = 1.0f;
+
+    // Distance rules:
+    private readonly float meleeRange = 6.0f;      // close => melee
+    private readonly float laserMinRange = 7.0f;  // far => laser
+    // between meleeRange and laserMinRange => aerial
 
     public PhoenixIdle(BossStateMachine sm, BossBehaviour boss) : base(sm, boss) { }
 
     public override void Enter()
     {
         cooldownTimer = 0f;
-        // Optional: play idle animation if you have one
-        // boss.mm.PlayMove("Idle");
+        boss.rb.linearVelocity = Vector3.zero;
     }
 
     public override void Execute()
     {
-        // Stop movement
-        boss.rb.linearVelocity = Vector3.zero;
+        if (Time.frameCount % 30 == 0)
+            Debug.Log($"Idle tick | playerNull={(boss.currPlayer == null)} | los={boss.HasLOS()} | cd={cooldownTimer:F2}");
 
-        // Face player
+        boss.rb.linearVelocity = Vector3.zero;
         boss.transform.rotation = boss.RotateToPlayer();
 
-        // Wait cooldown
         cooldownTimer += Time.deltaTime;
 
-        // Check distance to decide attack
-        // IMPORTANT: change boss.player to your actual player reference if needed
-        if (boss.player == null) return;
+        if (boss.currPlayer == null) return;
 
-        float dist = Vector3.Distance(boss.transform.position, boss.player.transform.position);
+        float dist = boss.DistanceToPlayer().magnitude;
+        bool los = boss.HasLOS();
 
-        if (cooldownTimer >= attackCooldown && dist <= attackRange)
+        if (!los) return;
+        if (cooldownTimer < attackCooldown) return;
+
+        if (dist <= meleeRange)
         {
-            sm.ChangeState<PhoenixAttack>();
+            sm.ChangeState<PhoenixAttackMelee>();
+            return;
         }
+
+        if (dist >= laserMinRange)
+        {
+            //sm.ChangeState<PhoenixAttackLaser>();
+            sm.ChangeState<PhoenixAttackMelee>();
+            return;
+        }
+
+        sm.ChangeState<PhoenixAerialSlash>();
     }
 
-    public override void Exit()
-    {
-    }
-
-    public override void ComboFin()
-    {
-        // Idle usually doesn't care about combo finishing
-    }
+    public override void Exit() { }
 }

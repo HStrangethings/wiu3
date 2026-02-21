@@ -2,42 +2,32 @@ using UnityEngine;
 
 public class PhoenixAttack : BossState
 {
-    private bool attackStarted;
+    private bool started;
 
     public PhoenixAttack(BossStateMachine sm, BossBehaviour boss) : base(sm, boss) { }
 
     public override void Enter()
     {
-        attackStarted = false;
+        started = false;
+        boss.rb.linearVelocity = Vector3.zero;
     }
 
     public override void Execute()
     {
-        // Stop moving during attack
         boss.rb.linearVelocity = Vector3.zero;
-
-        // Optional: keep facing player while attacking
         boss.transform.rotation = boss.RotateToPlayer();
 
-        // Start attack only ONCE
-        if (!attackStarted)
+        if (!started)
         {
-            attackStarted = true;
-
-            // Pick your attack move name
-            boss.mm.PlayMove("LaserBeam");
+            started = true;
+            boss.mm.PlayMove("LaserBeam"); // LaserBeam.Start() plays LaserBeamAnim
         }
     }
 
-    public override void Exit()
-    {
-        // Cleanup if needed (stop effects, etc.)
-    }
-
-    // This should be called when the attack finishes
-    // (e.g., animation event, MoveManager callback, etc.)
     public override void ComboFin()
     {
         sm.ChangeState<PhoenixIdle>();
     }
+
+    public override void Exit() { }
 }

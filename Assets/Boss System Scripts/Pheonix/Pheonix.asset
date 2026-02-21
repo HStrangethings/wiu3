@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Pheonix
   m_EditorClassIdentifier: 
   bossName: Pheonix
-  baseHealth: 0
-  baseAtk: 0
+  baseHealth: 30
+  baseAtk: 5
   baseSpeed: 0
   health01: 0
   health: 0
