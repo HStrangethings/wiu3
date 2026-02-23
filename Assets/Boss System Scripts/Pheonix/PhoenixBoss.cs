@@ -5,12 +5,14 @@ public class PhoenixBoss : BossBehaviour
 {
     [Header("Melee Movement (Kinematic)")]
     public AnimationCurve meleeMoveCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
-    public float meleeMoveDuration = 0.8f;
     public float meleeLiftHeight = 2.0f;
     public float meleeDashDistance = 6.0f;
-
+    public float meleeMoveDuration = 0.8f;   // total time for lift+dash
     [Range(0.05f, 0.95f)]
-    public float meleeLiftPortion = 0.3f;
+    public float meleeLiftPortion = 0.3f;    // how much of duration is "lift" phase
+
+    //[Header("Melee Landing")]
+    //public float meleeLandingOffset = 0f;
 
 
     [Header("Melee Hitboxes (Drag leg colliders here)")]
@@ -139,14 +141,13 @@ public class PhoenixBoss : BossBehaviour
     }
 
     // ---- Melee events (put on Melee clip) ----
+    public void AE_MeleeStartMove() => mm.currentMove?.AnimEvent("startMove");
     public void AE_MeleeHitOn() => mm.currentMove?.AnimEvent("hitOn");
     public void AE_MeleeHitOff() => mm.currentMove?.AnimEvent("hitOff");
+    public void AE_MeleeEnd() => mm.currentMove?.AnimEvent("end");
     public void AE_MeleeComboCheck() => mm.currentMove?.AnimEvent("comboCheck");
 
-    public void AE_MeleeEnd()
-    {
-        mm.currentMove?.AnimEvent("end");
-    }
+    
 
     // ---- AerialSlash events (put on AerialSlashAnim clip) ----
     public void AE_AerialSlashSpawn() => mm.currentMove?.AnimEvent("spawn");
