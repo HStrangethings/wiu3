@@ -145,30 +145,31 @@ public class BossBehaviour : MonoBehaviour
         //then print out current queue of moves
         //assign this string to a TextMeshProUGUI.text
 
-        var sb = new StringBuilder(512);
-        sb.AppendLine("States:");
-        sb.AppendLine($"  {sm.currentState.GetType().Name}");
-        if (mm.currentMove != null)
-        {
-            sb.AppendLine($"Current Move ({mm.currentMove.GetType().Name}");
-        }
-        else { sb.AppendLine($"Current Move (null)"); }
-            sb.AppendLine($"Queued Moves ({mm.queuedMoves.Count})");
-        if (mm.queuedMoves.Count == 0){
-            sb.AppendLine("  (empty)");
-        }
-        else
-        {
-            int i = 0;
-            foreach (var move in mm.queuedMoves) // does NOT dequeue
-            {
-                sb.AppendLine($"  {i}: {move}");
-                i++;
-            }
-        }
-        sb.AppendLine($"AngleToPlayer: {ToPlayerAngle()}");
+        Debug.Log(sm.currentState.GetType().Name);
+        //var sb = new StringBuilder(512);
+        //sb.AppendLine("States:");
+        //sb.AppendLine($"  {sm.currentState.GetType().Name}");
+        //if (mm.currentMove != null)
+        //{
+        //    sb.AppendLine($"Current Move ({mm.currentMove.GetType().Name}");
+        //}
+        //else { sb.AppendLine($"Current Move (null)"); }
+        //    sb.AppendLine($"Queued Moves ({mm.queuedMoves.Count})");
+        //if (mm.queuedMoves.Count == 0){
+        //    sb.AppendLine("  (empty)");
+        //}
+        //else
+        //{
+        //    int i = 0;
+        //    foreach (var move in mm.queuedMoves) // does NOT dequeue
+        //    {
+        //        sb.AppendLine($"  {i}: {move}");
+        //        i++;
+        //    }
+        //}
+        //sb.AppendLine($"AngleToPlayer: {ToPlayerAngle()}");
 
-        DebugText.text = sb.ToString();
+        //DebugText.text = sb.ToString();
     }
 
     private void OnDrawGizmos()

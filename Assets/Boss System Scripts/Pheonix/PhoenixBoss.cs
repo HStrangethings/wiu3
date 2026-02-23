@@ -37,6 +37,8 @@ public class PhoenixBoss : BossBehaviour
     private bool isFrozen = false;
     private Coroutine laserFreezeRoutine;
 
+    public HitboxID shockwave;
+
     public override void Start()
     {
         base.Start();
@@ -50,7 +52,7 @@ public class PhoenixBoss : BossBehaviour
         // Moves
         mm.AddMove("EnergySlash", new EnergySlash(this, 0f, 0)); // uses Melee animation + leg hitboxes
         mm.AddMove("LaserBeam", new LaserBeam(this, 3f));        // plays LaserBeamAnim + freeze-spawn logic
-        mm.AddMove("AerialSlash", new AerialSlash(this, aerialSlashSpeed));
+        mm.AddMove("AerialSlash", new AerialSlash(this));
 
         // If you still want your other moves, keep them too:
         // mm.AddMove("TripleSlash", new TripleSlash(this, 50, 0));
@@ -65,6 +67,7 @@ public class PhoenixBoss : BossBehaviour
 
     private void Update()
     {
+        CurrentBossDebug();
         TryEnterPhase2();
     }
 
@@ -147,7 +150,11 @@ public class PhoenixBoss : BossBehaviour
     public void AE_MeleeEnd() => mm.currentMove?.AnimEvent("end");
     public void AE_MeleeComboCheck() => mm.currentMove?.AnimEvent("comboCheck");
 
-    
+    public void AE_MeleeHitCheck() => mm.currentMove?.AnimEvent("hitCheck");
+    public void AE_MeleeEndHitCheck() => mm.currentMove?.AnimEvent("endHitCheck");
+    public void AE_MeleeLand() => mm.currentMove?.AnimEvent("land");
+
+
 
     // ---- AerialSlash events (put on AerialSlashAnim clip) ----
     public void AE_AerialSlashSpawn() => mm.currentMove?.AnimEvent("spawn");

@@ -41,8 +41,11 @@ public class BossStateMachine : MonoBehaviour
 
     private void Update()
     {
+        if (Time.frameCount % 30 == 0 && currentState != null)
+            Debug.Log($"[SM] currentState = {currentState.GetType().Name}");
+
         currentState?.Execute();
-        if (currentState == null) Debug.Log("BossStateMachine: currentState is NULL");
+        
     }
 
     public void ComboFin()

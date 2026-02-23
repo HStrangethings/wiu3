@@ -22,6 +22,13 @@ public class PhoenixAerialSlash : BossState
             started = true;
             boss.mm.PlayMove("AerialSlash");
         }
+
+        //  FAILSAFE: if aerial slash animation finished, return to Idle
+        AnimatorStateInfo st = boss.animator.GetCurrentAnimatorStateInfo(0);
+        if (st.IsName("AerialSlash") && st.normalizedTime >= 0.99f)
+        {
+            sm.ChangeState<PhoenixIdle>();
+        }
     }
 
     public override void ComboFin()

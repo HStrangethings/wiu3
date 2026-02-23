@@ -237,7 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 186798403}
   - component: {fileID: 186798404}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: melee collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1831,7 +1831,7 @@ GameObject:
   - component: {fileID: 862830169}
   - component: {fileID: 862830168}
   - component: {fileID: 862830167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: real
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1847,7 +1847,7 @@ Transform:
   m_GameObject: {fileID: 862830165}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1900,7 +1900,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2072,7 +2072,7 @@ GameObject:
   - component: {fileID: 934713853}
   - component: {fileID: 934713852}
   - component: {fileID: 934713851}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: P big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2180,7 +2180,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 1
+      value: 1.0056534
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2190,10 +2190,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  meleeMoveDuration: 2
   meleeLiftHeight: 17.09
-  meleeDashDistance: 10
-  meleeLiftPortion: 0.483
+  meleeDashDistance: 15
+  meleeMoveDuration: 1
+  meleeLiftPortion: 0.749
   legHitboxes:
   - {fileID: 9111908376227410459}
   - {fileID: 7501851726269950221}
@@ -2237,7 +2237,7 @@ Transform:
   m_GameObject: {fileID: 934713850}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.96, y: 2.5, z: 4.84}
+  m_LocalPosition: {x: -0.96, y: 0.74, z: 4.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4038,7 +4038,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668946729}
   - component: {fileID: 1668946730}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: colidder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4988,7 +4988,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2371582852015011727}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Beak_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5004,7 +5004,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8600706840562113101}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw02_jnt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5020,7 +5020,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6463873015726041572}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_Shoulder_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5108,7 +5108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 268040529405227706}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Feet_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5140,7 +5140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7589012340686636360}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_LowerLeg_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5175,7 +5175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3787922068062829038}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw03_jnt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5191,7 +5191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7005951927850005103}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Knee_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5207,7 +5207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2992672683153002775}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TailFeather_jnt6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5223,7 +5223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7682511869243804339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TailFeather05_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5239,7 +5239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3671515860316021946}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_LowerWingBend_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5317,7 +5317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5776552618058279177}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_LowerWing_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5364,7 +5364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7297238692018965280}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_LowerWing_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5399,7 +5399,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7306539342841081449}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tail_Twirl_Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5431,7 +5431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8585693584917488502}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_UpperWing_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5478,7 +5478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2648952849016546308}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hip_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5510,7 +5510,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8282735125291642114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spine1_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5526,7 +5526,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2492469790676983800}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw02_jnt3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5542,7 +5542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3265976910811344164}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_UpperLeg_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5558,7 +5558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2057524970024065454}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw04_jnt1_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5574,7 +5574,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7277073298413796391}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_TailFeather01_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5606,7 +5606,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6631350136612652883}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_Claw01_jnt1_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5622,7 +5622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1487006416747481746}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_Beak_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5653,7 +5653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4816686565148475400}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw04_jnt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5669,7 +5669,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5784073714337520332}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw04_jnt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5685,7 +5685,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6833907489885287848}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw04_jnt3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5746,7 +5746,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7257475523866844390}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_HeadFeather05_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5762,7 +5762,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 298104480378269852}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Knee_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5778,7 +5778,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6601045036117052318}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather_Curl_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5813,7 +5813,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2617948002027792875}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_UpperWing_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5845,7 +5845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7709061353803353508}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw03_jnt2_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5876,7 +5876,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8691953971194175804}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TailFeather02_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5892,7 +5892,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7347008380523295542}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_HIP_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5924,7 +5924,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4056278386106582495}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TailFeather_jnt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5972,7 +5972,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3295050222396399539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_Claw03_jnt2_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5988,7 +5988,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1001535878105577205}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_WingBend_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6004,7 +6004,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 738777464407067778}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_LowerWingBend_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6052,7 +6052,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4398615705555098513}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_HeadFeather02_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6068,7 +6068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8297463974369013055}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_Foot_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6116,7 +6116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4834248562091962263}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_UpperLeg_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6227,7 +6227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5802432374033463079}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather02_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6280,7 +6280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6970915717755652684}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw01_jnt3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6296,7 +6296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8961321624588374179}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_Claw01_jnt2_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6344,7 +6344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5855974700853271464}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_Claw02_jnt1_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6376,7 +6376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6825497654676390165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw03_jnt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6392,7 +6392,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 220104307713136051}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Beak_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6442,7 +6442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4732778630481116919}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_Neck2_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6475,7 +6475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7237229331629348814}
   - component: {fileID: 4975317047010970336}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wings2_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6491,7 +6491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4338150763550977228}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6523,7 +6523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5962185263410050092}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather_3_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6539,7 +6539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8866170405595905220}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BeakEnd_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6571,7 +6571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2541827798330420081}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6587,7 +6587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9019644782250306306}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw01_jnt2_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6692,7 +6692,7 @@ GameObject:
   - component: {fileID: 7778153016329422859}
   - component: {fileID: 7501851726269950221}
   - component: {fileID: 1125433437312551014}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6708,7 +6708,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3905308475449160566}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_Foot_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6871,7 +6871,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7847613205684477974}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tail_Curl_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6887,7 +6887,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5407153993484346259}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6903,7 +6903,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8685191270095094240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather_Twirl_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6919,7 +6919,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 655135805801093841}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw03_jnt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6935,7 +6935,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6763878035200274376}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TailFeather04_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6951,7 +6951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2037670348716677542}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather_Sway_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6967,7 +6967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7404735383687028523}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather_Sway_Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6983,7 +6983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6064656948218008004}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tail_Sway_Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6999,7 +6999,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5221104233963179732}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TailFeather03_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7015,7 +7015,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2568107232089023513}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw04_jnt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7091,7 +7091,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 616729033194909852}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw04_jnt3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7201,7 +7201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8772409083786518959}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Knee_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7217,7 +7217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8550252833270358309}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_Claw01_jnt2_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7233,7 +7233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3659996603332740046}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw03_jnt2_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7249,7 +7249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4398576043571916204}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spine1_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7312,7 +7312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2564594361141456206}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_UpperLeg_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7360,7 +7360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6571170662760229828}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_Claw04_jnt1_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7376,7 +7376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 335173682055345648}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Foot_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7393,7 +7393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7429238764695498457}
   - component: {fileID: 7245416835784496869}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Phoenix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7425,7 +7425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 594520050146659371}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_UpperWing_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7441,7 +7441,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7990022665207750207}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tail_Twirl_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7501,7 +7501,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6137678470977389783}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Shoulder_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7517,7 +7517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2136707111856685099}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Feet_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7596,7 +7596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6287011005027618095}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_Knee_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7627,7 +7627,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7169842417854949241}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_Claw03_jnt1_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7659,7 +7659,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 947666745509823420}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_Head_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7787,7 +7787,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3828855309444137462}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TailFeather_jnt4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7803,7 +7803,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3622319988233924124}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather01_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7819,7 +7819,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3656702810113995553}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_TailFeather04_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7835,7 +7835,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 817621635267262351}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather_4_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7867,7 +7867,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2556369074251033583}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_Claw04_jnt2_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7883,7 +7883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1253776352239769549}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hip_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7931,7 +7931,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3979525321723754919}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw04_jnt1_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7962,7 +7962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5581194398072476571}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_WingEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7993,7 +7993,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6757101550801154482}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw02_jnt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8025,7 +8025,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8800797755009767956}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_WingEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8041,7 +8041,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4109370862747284649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather05_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8057,7 +8057,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2440423744812992247}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Shoulder_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8104,7 +8104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 650827459261884231}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Foot_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8169,7 +8169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3950347752744667335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Neck1_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8185,7 +8185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2209383098576234063}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Shoulder_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8201,7 +8201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5150326785544020713}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_Claw04_jnt1_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8217,7 +8217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1941552912502955923}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw02_jnt2_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8233,7 +8233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3831419209464520006}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_UpperLeg_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8249,7 +8249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 725862405458819787}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_WingBend_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8281,7 +8281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8406543175284970268}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw02_jnt3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8297,7 +8297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4862593203827459515}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TailFeather_jnt3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8313,7 +8313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4200197764841463464}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_LowerWing_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8329,7 +8329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7905259691119358549}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_UpperWing_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8391,7 +8391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1460882367433392791}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw04_jnt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8439,7 +8439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4090283280241823531}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw01_jnt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8503,7 +8503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1769279585687984065}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_LowerLeg_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8535,7 +8535,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3127782956365076337}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_Claw02_jnt2_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8616,7 +8616,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7551638342342125611}
   - component: {fileID: 3052361022133499906}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TailMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8632,7 +8632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6927536438027275259}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_Claw01_jnt1_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8648,7 +8648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5597959718971061199}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_Claw02_jnt2_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8709,7 +8709,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1644589509446884310}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_Neck1_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8725,7 +8725,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7537599822152262256}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw02_jnt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8741,7 +8741,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6197559979791859324}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_HeadFeather01_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8788,7 +8788,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6252927509193634678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather04_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8836,7 +8836,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7515023050066752290}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_LowerWing_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8883,7 +8883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4879533357754679334}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw01_jnt1_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8899,7 +8899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8314996211128658500}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather_2_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8946,7 +8946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9006132366206774995}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather_Curl_Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8962,7 +8962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1827478984345120647}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw02_jnt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8978,7 +8978,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7790511432233848749}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw03_jnt1_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8994,7 +8994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6015620212893862496}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw01_jnt2_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9010,7 +9010,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1726285121818910951}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_LowerWing_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9026,7 +9026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5230025700603252118}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tail_Curl_Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9090,7 +9090,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1982657012588355372}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_Shoulder_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9186,7 +9186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6317475517447287050}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_WingBend_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9233,7 +9233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4437419810515357350}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AerialSlash_SP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9265,7 +9265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4891879495263459537}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw03_jnt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9313,7 +9313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9000806480409172096}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw01_jnt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9395,7 +9395,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6192889993341914291}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_HeadFeather04_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9427,7 +9427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3059314325024327262}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TailFeather_jnt5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9443,7 +9443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4784666443453806436}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw04_jnt2_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9475,7 +9475,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4851527618288744374}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_UpperWing_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9491,7 +9491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8518077008612530324}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_UpperLeg_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9507,7 +9507,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1286479156342082646}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_LowerLeg_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9523,7 +9523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4762181403162752982}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw03_jnt3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9555,7 +9555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2636635674017178184}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw02_jnt1_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9602,7 +9602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7222851951935170499}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Neck2_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9634,7 +9634,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5850865307048066702}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_TailFeather03_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9688,9 +9688,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  meleeMoveDuration: 0.8
   meleeLiftHeight: 2
   meleeDashDistance: 6
+  meleeMoveDuration: 0.8
   meleeLiftPortion: 0.3
   legHitboxes:
   - {fileID: 9111908376227410459}
@@ -9713,7 +9713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3079354762343007583}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather_5_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9729,7 +9729,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7865820790913655044}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Neck1_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9777,7 +9777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2312215323868474977}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_Spine1_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9793,7 +9793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3653963873689310507}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TailFeather01_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9830,7 +9830,7 @@ GameObject:
   - component: {fileID: 4270250554008331485}
   - component: {fileID: 3619139413665647617}
   - component: {fileID: 7602963938481240123}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Phoenix_New_Idle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9846,7 +9846,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5839924448644140430}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_Claw03_jnt2_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9862,7 +9862,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3224057053968106779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tail_Sway_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9910,7 +9910,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6958183288297484345}
   - component: {fileID: 545445518572424187}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9926,7 +9926,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1989382849605909936}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10004,7 +10004,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9201835472539953618}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_Claw03_jnt1_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10036,7 +10036,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 225051379640741135}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Shoulder_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10083,7 +10083,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8953690023248976393}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Neck2_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10295,7 +10295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2186500840165105791}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw03_jnt1_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10535,7 +10535,7 @@ GameObject:
   - component: {fileID: 8648029614144657407}
   - component: {fileID: 3015353628516265418}
   - component: {fileID: 2440456657126895740}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: laserpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10566,7 +10566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4073978233727773798}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RIG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10582,7 +10582,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5851521732815819819}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw01_jnt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10600,7 +10600,7 @@ GameObject:
   - component: {fileID: 5118659936091592912}
   - component: {fileID: 9111908376227410459}
   - component: {fileID: 5039591292819144851}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10632,7 +10632,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7684685861620797572}
   - component: {fileID: 1835888643646088673}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wings_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10664,7 +10664,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1984306156221605493}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Facial_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10680,7 +10680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7414182151608874166}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw02_jnt1_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10696,7 +10696,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8953035363461141104}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw01_jnt1_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10790,7 +10790,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5368156274562239646}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw03_jnt3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10806,7 +10806,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3607580184421616000}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_Claw04_jnt2_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10822,7 +10822,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7547664270151185137}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_UpperWing_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10856,7 +10856,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4186354934800737738}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather_6_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10888,7 +10888,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2653340670194192692}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_LowerLeg_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10935,7 +10935,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1511239726157446316}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TailFeather_jnt1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10951,7 +10951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9133675327452561518}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PhoenixMesh1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10967,7 +10967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2084663207672253767}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_Claw02_jnt2_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10983,7 +10983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3982060898574761176}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_TailFeather05_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10999,7 +10999,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3454529285332490684}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_LowerLeg_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11031,7 +11031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3295702340046173962}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_WingBend_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11047,7 +11047,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7859587926866971284}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_TailFeather02_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11063,7 +11063,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2395666208522548793}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Knee_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11080,7 +11080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7128666744107870239}
   - component: {fileID: 9130114408150382203}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eyeballs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11168,7 +11168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7041073141814314171}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_UpperLeg_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11184,7 +11184,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6748659904797403709}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather_1_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11278,7 +11278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3780957141500222632}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw01_jnt3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11294,7 +11294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8646979309020254832}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_Knee_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11358,7 +11358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1300446881925245764}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw04_jnt2_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11406,7 +11406,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6138638977249679563}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: L_LowerWing_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11437,7 +11437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1692697028633298733}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_HeadFeather03_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11453,7 +11453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4603233098610971795}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: R_Claw01_jnt2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11469,7 +11469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2401185848782264886}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_L_LowerLeg_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11485,7 +11485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3834612503327006950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadFeather03_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11522,7 +11522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5906401944203817096}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Offset_R_Claw02_jnt1_CTRL_grp
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -22,6 +22,13 @@ public class PhoenixAttackLaser : BossState
             started = true;
             boss.mm.PlayMove("LaserBeam");
         }
+
+        //  FAILSAFE
+        AnimatorStateInfo st = boss.animator.GetCurrentAnimatorStateInfo(0);
+        if (st.IsName("LaserBeamAnim") && st.normalizedTime >= 0.99f)
+        {
+            sm.ChangeState<PhoenixIdle>();
+        }
     }
 
     public override void ComboFin()
